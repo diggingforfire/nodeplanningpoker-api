@@ -1,0 +1,25 @@
+{
+  "name": "nodeplanningpoker  ",
+  "description": "A simple mobile friendly planning poker tool built with node.js",
+  "main": "app.js",
+  "authors": [
+    "diggingforfire"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.5.0",
+    "jquery.cookie": "jquery-cookie#^1.4.1",
+    "knockout": "^3.4.0",
+    "requirejs": "^2.2.0"
+  }
+}
