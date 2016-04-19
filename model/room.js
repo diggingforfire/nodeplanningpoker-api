@@ -1,22 +1,27 @@
 'use strict';
 
-module.exports = function Room(name) {
+module.exports = Room;
+
+function Room(name) {
     var self = this;
 
     self.name = name;
     self.cardsOpened = false;
     self.players = {};
     self.currentStory = '';
+}
 
-    self.addPlayer = function(player) {
-        self.players[player.name] = player;
-    };
+Room.prototype.addPlayer = function(player) {
+    var self = this;
+    self.players[player.name] = player;
+};
 
-    self.removePlayerByName = function(playerName) {
-        delete self.players[playerName];
-    };
+Room.prototype.removePlayerByName = function(playerName) {
+    var self = this;
+    delete self.players[playerName];
+};
 
-    self.toggleCards = function() {
-        self.cardsOpened = !self.cardsOpened;
-    };
+Room.prototype.toggleCards = function() {
+    var self = this;
+    self.cardsOpened = !self.cardsOpened;
 };

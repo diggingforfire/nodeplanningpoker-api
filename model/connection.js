@@ -1,66 +1,108 @@
 'use strict';
 
-module.exports = function Connection(lobby, socket, io, disconnect) {
+module.exports = Connection;
+
+function Connection(lobby, socket, io, disconnect) {
+
+    var self = this;
+
+    self._io = io;
+    self._lobby = lobby;
+    self._socket = socket;
 
     socket.on('joinRoom', function(roomName, playerName) {
-
-        console.log('player ' + playerName + ' joined room ' + roomName);
-
-        lobby.joinRoom(roomName, playerName, socket.id, function(room, player) {
-            socket.join(roomName);
-            socket.room = room;
-            socket.player = player;
-            updateRoom(room);
-        });
+        self.joinRoom(roomName, playerName);
     });
 
     socket.on('setEstimate', function(estimate) {
-        if (socket.room && socket.player) {
-
-            console.log('player ' + socket.player.name + ' set estimate to ' + estimate);
-
-            socket.player.currentEstimate = estimate;
-            updateRoom(socket.room);
-        }
+        self.setEstimate(estimate);
     });
 
     socket.on('toggleCards', function() {
-        if (socket.room && socket.player) {
-            socket.room.toggleCards();
-
-            console.log('player ' + socket.player.name + ' toggled cards to ' + socket.room.cardsOpened);
-
-            updateRoom(socket.room);
-        }
+        self.toggleCards();
     });
 
     socket.on('nextStory', function(story) {
-        if (socket.room && socket.player) {
-
-            socket.room.currentStory = story;
-
-            console.log('player ' + socket.player.name + ' called next story with subject ' + story);
-
-            updateRoom(socket.room);
-        }
+        self.nextStory(story);
     });
 
     socket.on('disconnect', function() {
-        if (socket.room && socket.player) {
-            console.log('player ' + socket.player.name + ' left room ' + socket.room.name);
-
-            lobby.leaveRoom(socket.room.name, socket.player.name, function(room) {
-                socket.leave(room.name);
-                updateRoom(room);
-            });
-        }
-
-        if (disconnect) {
-            disconnect();
-        }
+        self.disconnect(disconnect);
     });
+}
 
-    function updateRoom(room) {
-        io.sockets.in(room.name).emit('updateRoom', room);
+Connection.prototype.joinRoom = function(roomName, playerName) {
+    var self = this;
+
+    console.log('player ' + playerName + ' joined room ' + roomName);
+
+    self._lobby.joinRoom(roomName, playerName, self._socket.id, function(room, player) {
+        self._socket.join(roomName);
+        self._socket.room = room;
+        self._socket.player = player;
+        self.updateRoom(room);
+    });
+};
+
+Connection.prototype.setEstimate = function(estimate) {
+    var self = this;
+    var socket = self._socket;
+
+    if (socket.room && socket.player) {
+
+        console.log('player ' + socket.player.name + ' set estimate to ' + estimate);
+
+        socket.player.currentEstimate = estimate;
+        self.updateRoom(socket.room);
     }
+};
+
+Connection.prototype.toggleCards = function() {
+    var self = this;
+    var socket = self._socket;
+
+    if (socket.room && socket.player) {
+        socket.room.toggleCards();
+
+        console.log('player ' + socket.player.name + ' toggled cards to ' + socket.room.cardsOpened);
+
+        self.updateRoom(socket.room);
+    }
+};
+
+Connection.prototype.nextStory = function(story) {
+    var self = this;
+    var socket = self._socket;
+
+    if (socket.room && socket.player) {
+
+        socket.room.currentStory = story;
+
+        console.log('player ' + socket.player.name + ' called next story with subject ' + story);
+
+        self.updateRoom(socket.room);
+    }
+}
+
+Connection.prototype.disconnect = function(disconnect) {
+    var self = this;
+    var socket = self._socket;
+
+    if (socket.room && socket.player) {
+        console.log('player ' + socket.player.name + ' left room ' + socket.room.name);
+
+        self._lobby.leaveRoom(socket.room.name, socket.player.name, function(room) {
+            socket.leave(room.name);
+            self.updateRoom(room);
+        });
+    }
+
+    if (disconnect) {
+        disconnect(self);
+    }
+};
+
+Connection.prototype.updateRoom = function(room) {
+    var self = this;
+    self._io.sockets.in(room.name).emit('updateRoom', room);
 };
