@@ -3,12 +3,11 @@
 module.exports = Connection;
 
 function Connection(lobby, socket, io, disconnect) {
-
     var self = this;
 
-    self._io = io;
-    self._lobby = lobby;
-    self._socket = socket;
+    self.lobby = lobby;
+    self.socket = socket;
+    self.io = io;
 
     socket.on('joinRoom', function(roomName, playerName) {
         self.joinRoom(roomName, playerName);
@@ -33,20 +32,21 @@ function Connection(lobby, socket, io, disconnect) {
 
 Connection.prototype.joinRoom = function(roomName, playerName) {
     var self = this;
+    var socket = self.socket;
 
     console.log('player ' + playerName + ' joined room ' + roomName);
 
-    self._lobby.joinRoom(roomName, playerName, self._socket.id, function(room, player) {
-        self._socket.join(roomName);
-        self._socket.room = room;
-        self._socket.player = player;
+    self.lobby.joinRoom(roomName, playerName, socket.id, function(room, player) {
+        socket.join(roomName);
+        socket.room = room;
+        socket.player = player;
         self.updateRoom(room);
     });
 };
 
 Connection.prototype.setEstimate = function(estimate) {
     var self = this;
-    var socket = self._socket;
+    var socket = self.socket;
 
     if (socket.room && socket.player) {
 
@@ -59,7 +59,7 @@ Connection.prototype.setEstimate = function(estimate) {
 
 Connection.prototype.toggleCards = function() {
     var self = this;
-    var socket = self._socket;
+    var socket = self.socket;
 
     if (socket.room && socket.player) {
         socket.room.toggleCards();
@@ -72,7 +72,7 @@ Connection.prototype.toggleCards = function() {
 
 Connection.prototype.nextStory = function(story) {
     var self = this;
-    var socket = self._socket;
+    var socket = self.socket;
 
     if (socket.room && socket.player) {
 
@@ -86,12 +86,12 @@ Connection.prototype.nextStory = function(story) {
 
 Connection.prototype.disconnect = function(disconnect) {
     var self = this;
-    var socket = self._socket;
+    var socket = self.socket;
 
     if (socket.room && socket.player) {
         console.log('player ' + socket.player.name + ' left room ' + socket.room.name);
 
-        self._lobby.leaveRoom(socket.room.name, socket.player.name, function(room) {
+        self.lobby.leaveRoom(socket.room.name, socket.player.name, function(room) {
             socket.leave(room.name);
             self.updateRoom(room);
         });
@@ -104,5 +104,5 @@ Connection.prototype.disconnect = function(disconnect) {
 
 Connection.prototype.updateRoom = function(room) {
     var self = this;
-    self._io.sockets.in(room.name).emit('updateRoom', room);
+    self.io.sockets.in(room.name).emit('updateRoom', room);
 };

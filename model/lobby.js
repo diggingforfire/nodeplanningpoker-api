@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = function Lobby(Room, Player) {
+module.exports = Lobby;
+
+function Lobby(Room, Player) {
     var self = this;
 
     self.rooms = {};
@@ -34,4 +36,4 @@ module.exports = function Lobby(Room, Player) {
             left(room);
         }
     };
-};
+}

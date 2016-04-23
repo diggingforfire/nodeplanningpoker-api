@@ -13,7 +13,7 @@ define(['ko'], function(ko) {
         self.estimate = ko.observable('');
         self.nextStory = ko.observable('');
         self._players = ko.observable();
-        self.players = ko.dependentObservable(function() {
+        self.players = ko.computed(function() {
             var result = [];
 
             for (var key in self._players()) {
