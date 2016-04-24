@@ -1,12 +1,11 @@
-'use strict';
-
-define(['ko', 'lobby', 'room', 'io'], function(ko, LobbyViewModel, RoomViewModel, io) {
+define(['ko', 'lobby', 'room', 'io', 'config'], function(ko, LobbyViewModel, RoomViewModel, io, config) {
+    'use strict';
 
     function MasterViewModel() {
         var self = this;
 
-        self.socket = io();
-
+        self.socket = io.connect(config.serverUrl, {reconnect: true});
+        
         var room = new RoomViewModel(self.socket);
         var lobby = new LobbyViewModel(self.socket, function() {
             self.lobbyVisible(false);

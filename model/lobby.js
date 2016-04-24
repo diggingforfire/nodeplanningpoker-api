@@ -3,9 +3,7 @@
 var Room = require('./room');
 var Player = require('./player');
 
-module.exports = Lobby;
-
-function Lobby() {
+module.exports = function Lobby() {
     var self = this;
 
     self.rooms = {};
@@ -39,4 +37,4 @@ function Lobby() {
             left(room);
         }
     };
-}
+};

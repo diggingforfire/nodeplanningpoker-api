@@ -1,7 +1,6 @@
-'use strict';
-
 define(['ko'], function(ko) {
-
+    'use strict';
+    
     function RoomViewModel(socket) {
         var self = this;
 

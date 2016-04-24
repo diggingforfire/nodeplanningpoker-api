@@ -10,6 +10,7 @@ var Lobby = require('./model/lobby');
 
 var config = require('./config');
 var logger = require('./logger');
+
 var lobby = new Lobby();
 var connectionHandler = new ConnectionHandler(io, lobby);
 

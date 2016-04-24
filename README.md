@@ -5,7 +5,7 @@ A simple mobile friendly planning poker tool built with node.js
 
 Mostly made as a learning experience with regards to the node.js platform. Components used include:
 
-* Mongodb for storing log entries
+* MongoDB for storing log entries
 * Express as web framework
 * Socket.IO for real time communication
 * Mocha for unit testing

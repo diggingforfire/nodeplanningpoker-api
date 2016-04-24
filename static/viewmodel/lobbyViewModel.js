@@ -1,7 +1,6 @@
-'use strict';
-
 define(['ko', 'jquery', 'jquery.cookie'], function(ko, $) {
-
+    'use strict';
+    
     function LobbyViewModel(socket, roomJoin) {
         var self = this;
 

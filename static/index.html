@@ -87,14 +87,13 @@
                 'master': 'viewmodel/masterviewmodel',
                 'lobby': 'viewmodel/lobbyviewmodel',
                 'room': 'viewmodel/roomviewmodel',
-                'fadeVisible': 'binding/fadeVisibleBinding'
+                'fadeVisible': 'binding/fadeVisibleBinding',
+                'config': 'config'
             }
         });
 
         require(['ko', 'jquery', 'master', 'fadeVisible'], function(ko, $, MasterViewModel, FadeVisibleBinding){
-
             ko.bindingHandlers.fadeVisible = new FadeVisibleBinding();
-
             var masterViewModel = new MasterViewModel();
             ko.applyBindings(masterViewModel);
         });

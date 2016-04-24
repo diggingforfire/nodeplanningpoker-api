@@ -3,9 +3,7 @@
 var Connection = require('./Connection');
 var logger = require('../logger');
 
-module.exports = ConnectionHandler;
-
-function ConnectionHandler(io, lobby) {
+module.exports = function ConnectionHandler(io, lobby) {
 
     var connections = [];
 
@@ -43,4 +41,4 @@ function ConnectionHandler(io, lobby) {
     function logConnectionCount() {
         logger.log.write('Number of active connections: ' + connections.length, logger.logType.debug);
     }
-}
+};
