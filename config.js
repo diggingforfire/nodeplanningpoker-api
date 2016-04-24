@@ -1,5 +1,10 @@
 'use strict';
 
-var config = module.exports = {};
+module.exports = new Config();
 
-config.port = 5050;
+function Config() {
+    var self = this;
+
+    self.webServerPort = 5050;
+    self.mongoConnectionString = 'mongodb://192.168.178.100:27017/nodeplanningpoker';
+}

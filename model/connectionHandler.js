@@ -1,6 +1,11 @@
 'use strict';
 
-module.exports = function ConnectionHandler(Connection, io, lobby) {
+var Connection = require('./Connection');
+var logger = require('../logger');
+
+module.exports = ConnectionHandler;
+
+function ConnectionHandler(io, lobby) {
 
     var connections = [];
 
@@ -10,11 +15,13 @@ module.exports = function ConnectionHandler(Connection, io, lobby) {
 
     function addConnection(socket) {
 
-        console.log('new connection in lobby with id ' + socket.id);
+        logger.log.write('New connection with id ' + socket.id, logger.logType.debug);
 
-        var connection = new Connection(lobby, socket, io, function(connection) {
+        var disconnect = function(connection) {
             removeConnection(socket, connection);
-        });
+        };
+
+        var connection = new Connection(lobby, socket, io, disconnect);
 
         connections.push(connection);
 
@@ -23,7 +30,7 @@ module.exports = function ConnectionHandler(Connection, io, lobby) {
 
     function removeConnection(socket, connection) {
 
-        console.log('connection dropped with id ' + socket.id);
+        logger.log.write('Connection dropped with id ' + socket.id, logger.logType.debug);
 
         var index = connections.indexOf(connection);
         if (index > - 1) {
@@ -34,6 +41,6 @@ module.exports = function ConnectionHandler(Connection, io, lobby) {
     }
 
     function logConnectionCount() {
-        console.log('number of active connections: ' + connections.length);
+        logger.log.write('Number of active connections: ' + connections.length, logger.logType.debug);
     }
-};
+}

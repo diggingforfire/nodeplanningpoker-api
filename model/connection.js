@@ -1,5 +1,7 @@
 'use strict';
 
+var logger = require('../logger');
+
 module.exports = Connection;
 
 function Connection(lobby, socket, io, disconnect) {
@@ -34,7 +36,7 @@ Connection.prototype.joinRoom = function(roomName, playerName) {
     var self = this;
     var socket = self.socket;
 
-    console.log('player ' + playerName + ' joined room ' + roomName);
+    logger.log.write('Player ' + playerName + ' joined room ' + roomName, logger.logType.debug);
 
     self.lobby.joinRoom(roomName, playerName, socket.id, function(room, player) {
         socket.join(roomName);
@@ -50,7 +52,7 @@ Connection.prototype.setEstimate = function(estimate) {
 
     if (socket.room && socket.player) {
 
-        console.log('player ' + socket.player.name + ' set estimate to ' + estimate);
+        logger.log.write('Player ' + socket.player.name + ' set estimate to ' + estimate, logger.logType.debug);
 
         socket.player.currentEstimate = estimate;
         self.updateRoom(socket.room);
@@ -64,7 +66,7 @@ Connection.prototype.toggleCards = function() {
     if (socket.room && socket.player) {
         socket.room.toggleCards();
 
-        console.log('player ' + socket.player.name + ' toggled cards to ' + socket.room.cardsOpened);
+        logger.log.write('Player ' + socket.player.name + ' toggled cards to ' + socket.room.cardsOpened, logger.logType.debug, socket.room);
 
         self.updateRoom(socket.room);
     }
@@ -78,7 +80,7 @@ Connection.prototype.nextStory = function(story) {
 
         socket.room.currentStory = story;
 
-        console.log('player ' + socket.player.name + ' called next story with subject ' + story);
+        logger.log.write('Player ' + socket.player.name + ' called next story with subject ' + story, logger.logType.debug);
 
         self.updateRoom(socket.room);
     }
@@ -89,7 +91,7 @@ Connection.prototype.disconnect = function(disconnect) {
     var socket = self.socket;
 
     if (socket.room && socket.player) {
-        console.log('player ' + socket.player.name + ' left room ' + socket.room.name);
+        logger.log.write('Player ' + socket.player.name + ' left room ' + socket.room.name, logger.logType.debug);
 
         self.lobby.leaveRoom(socket.room.name, socket.player.name, function(room) {
             socket.leave(room.name);
