@@ -20,6 +20,6 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/static/index.html');
 });
 
-http.listen(config.webServerPort, function() {
-    logger.log.write('Running server on port ' + config.webServerPort, logger.logType.info, null, true);
+http.listen(config.serverPort, function() {
+    logger.log.write('Running server on port ' + config.serverPort, logger.logType.INFO);
 });

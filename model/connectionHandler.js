@@ -13,7 +13,7 @@ module.exports = function ConnectionHandler(io, lobby) {
 
     function addConnection(socket) {
 
-        logger.log.write('New connection with id ' + socket.id, logger.logType.debug);
+        logger.log.write('New connection with id ' + socket.id, logger.logType.DEBUG);
 
         var disconnect = function(connection) {
             removeConnection(socket, connection);
@@ -28,7 +28,7 @@ module.exports = function ConnectionHandler(io, lobby) {
 
     function removeConnection(socket, connection) {
 
-        logger.log.write('Connection dropped with id ' + socket.id, logger.logType.debug);
+        logger.log.write('Connection dropped with id ' + socket.id, logger.logType.DEBUG);
 
         var index = connections.indexOf(connection);
         if (index > - 1) {
@@ -39,6 +39,6 @@ module.exports = function ConnectionHandler(io, lobby) {
     }
 
     function logConnectionCount() {
-        logger.log.write('Number of active connections: ' + connections.length, logger.logType.debug);
+        logger.log.write('Number of active connections: ' + connections.length, logger.logType.DEBUG);
     }
 };

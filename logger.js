@@ -1,24 +1,25 @@
 'use strict';
 
 var database = require('./data/database');
+var config = require('./config');
 
 var logger = module.exports = {};
 
 logger.log = new Log();
-logger.logType = Object.freeze({'debug': 1, 'info': 2, 'warning': 3, 'error': 4})
+logger.logType = Object.freeze({'DEBUG': 1, 'INFO': 2, 'WARNING': 3, 'ERROR': 4})
 
 function Log() {
     var self = this;
 
-    self.write = function(message, type, object, writeToConsole) {
+    self.write = function(message, type, object) {
 
-        if (writeToConsole) {
-            console.log(message);
+        if (config.logToConsole) {
+            console.log(getTimeFormattedMessage(message));
         }
-        
+
         database.getServer(function(err, server) {
             if (err) {
-                console.warn('Error writing to log: ' + err);
+                console.warn(getTimeFormattedMessage('Error writing to log: ' + err));
             } else {
                 var logEntry = {
                     message: message,
@@ -35,10 +36,14 @@ function Log() {
 
                 server.log.insert(logEntry, function(err) {
                     if (err) {
-                        console.warn(err.message);
+                        console.warn(getTimeFormattedMessage(err.message));
                     }
                 });
             }
         });
     };
+
+    function getTimeFormattedMessage(message) {
+        return '[' + new Date().toISOString() +  '] ' + message;
+    }
 }

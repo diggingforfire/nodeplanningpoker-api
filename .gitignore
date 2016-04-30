@@ -34,3 +34,6 @@ node_modules
 
 # Webstorm related files
 .idea
+
+# Visual Studio Code related files
+.vscode
