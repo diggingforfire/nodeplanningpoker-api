@@ -5,12 +5,14 @@ define(['ko', 'lobby', 'room', 'io', 'config'], function(ko, LobbyViewModel, Roo
         var self = this;
 
         self.socket = io.connect(config.serverUrl, {reconnect: true});
-        
-        var room = new RoomViewModel(self.socket);
-        var lobby = new LobbyViewModel(self.socket, function() {
+
+        var roomJoin = function() {
             self.lobbyVisible(false);
             self.roomVisible(true);
-        });
+        };
+
+        var room = new RoomViewModel(self.socket);
+        var lobby = new LobbyViewModel(self.socket, roomJoin);
         
         self.room = ko.observable(room);
         self.lobby = ko.observable(lobby);

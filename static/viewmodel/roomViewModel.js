@@ -1,10 +1,8 @@
-define(['ko'], function(ko) {
+define(['ko', 'config'], function(ko, config) {
     'use strict';
     
     function RoomViewModel(socket) {
         var self = this;
-
-        var pointValues = [1, 2, 3, 5, 8, 13, 20, 40, 100, '?', '∞', '🍵'];
 
         self.socket = socket;
 
@@ -24,7 +22,7 @@ define(['ko'], function(ko) {
             return result;
         });
 
-        self.storyPoints = ko.observableArray(pointValues.map(function (point) {
+        self.storyPoints = ko.observableArray(config.pointValues.map(function (point) {
             return {
                 value: point,
                 isSelected: ko.computed(function() {
@@ -47,6 +45,7 @@ define(['ko'], function(ko) {
 
         self.socket.on('updateRoom', function(room) {
 
+            console.log(room);
             self.nextStory(room.currentStory);
             self.name(room.name);
             self._players(room.players);
