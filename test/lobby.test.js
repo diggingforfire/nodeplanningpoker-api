@@ -23,7 +23,7 @@ describe('Lobby', function () {
 
         /*
         it('should create a new player', function() {
-             // TODO: implement with rewire, proxyuire or such  
+             // TODO: implement with rewire, proxyquire or such  
              
             var spy = sinon.spy(Player);
             var lobby = new Lobby();

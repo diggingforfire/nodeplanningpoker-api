@@ -1,5 +1,5 @@
 {
-  "name": "nodeplanningpoker  ",
+  "name": "nodeplanningpoker",
   "description": "A simple mobile friendly planning poker tool built with node.js",
   "main": "app.js",
   "authors": [
@@ -16,10 +16,8 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "^1.5.5",
     "bootstrap": "^3.3.6",
-    "font-awesome": "^4.5.0",
-    "jquery.cookie": "jquery-cookie#^1.4.1",
-    "knockout": "^3.4.0",
-    "requirejs": "^2.2.0"
+    "normalize-css": "normalize.css#^4.1.1"
   }
 }

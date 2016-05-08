@@ -1,102 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nodePlanningPoker">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
     <title>Node Planning Poker</title>
+    <meta name="description" content="A simple mobile friendly planning poker tool built with node.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/lib/normalize-css/normalize.css">
     <link rel="stylesheet" href="static/lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/client.css">
-    <link rel="stylesheet" href="static/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/site.css">
 </head>
 <body>
-
-    <div class="container wrapper">
-
-            <div class="lobby" data-bind="with: lobby, visible: lobbyVisible">
-                <div class="row">
-                    <h1>Planning poker</h1>
-                </div>
-
-                <div class="row">
-                    <input type="text" id="player" data-bind="value: name" class="form-control" placeholder="Your name">
-                </div>
-
-                <div class="row">
-                    <input type="text" id="room" data-bind="value: room" class="form-control" placeholder="Room">
-                </div>
-
-                <div class="row join">
-                    <button id="joinRoom" type="button" class="btn btn-primary btn-lg" data-bind="click: joinRoom">Join room</button>
-                </div>
-
-                <div id="logo" class="row">
-                    <img src="./static/img/logo.png">
-                </div>
-            </div>
-
-            <div class="room" style="display:none" data-bind="with: room, fadeVisible: roomVisible">
-
-                <div class="roomHeader">
-                    <div class="row">
-                        <h1 data-bind="text: name" class="roomname"></h1>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button id="toggleCards" data-bind="click: toggleCards" type="button" class="btn btn-primary btn-lg">Show cards</button>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Story" data-bind="value: nextStory">
-                            <span class="input-group-btn">
-                                <button id="next" type="button" data-bind="click: setNextStory" class="btn btn-primary btn-lg">Next<span class="fa fa-arrow-right nextarrow"></span></button>
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row cards">
-                    <ul id="cards" data-bind="foreach:players">
-                        <li class="card-on-table">
-                            <h3 data-bind="text: name"></h3>
-                            <p data-bind="text: currentEstimate"></p>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="row points">
-                    <ul id="points" data-bind="foreach:storyPoints">
-                        <li class="card" data-bind="click: $parent.setEstimate, text: value, css: {selected: isSelected}"></li>
-                    </ul>
-                </div>
-
-            </div>
-
-    </div>
-
-    <script src="static/lib/requirejs/require.js"></script>
-    <script>
-        require.config({
-            baseUrl: 'static',
-            paths: {
-                'ko': 'lib/knockout/dist/knockout',
-                'io': '/socket.io/socket.io',
-                'jquery': 'lib/jquery/dist/jquery',
-                'jquery.cookie': 'lib/jquery.cookie/jquery.cookie',
-                'master': 'viewmodel/masterviewmodel',
-                'lobby': 'viewmodel/lobbyviewmodel',
-                'room': 'viewmodel/roomviewmodel',
-                'fadeVisible': 'binding/fadeVisibleBinding',
-                'config': 'config'
-            }
-        });
-
-        require(['ko', 'jquery', 'master', 'fadeVisible'], function(ko, $, MasterViewModel, FadeVisibleBinding){
-            ko.bindingHandlers.fadeVisible = new FadeVisibleBinding();
-            var masterViewModel = new MasterViewModel();
-            ko.applyBindings(masterViewModel);
-        });
-    </script>
+    
+    <script src="static/lib/angular/angular.min.js"></script>
+    <script src="static/js/app.js"></script>
 </body>
 </html>
