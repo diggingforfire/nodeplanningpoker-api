@@ -25,3 +25,8 @@ Room.prototype.toggleCards = function() {
     var self = this;
     self.cardsOpened = !self.cardsOpened;
 };
+
+Room.prototype.getPlayers = function() {
+    var self = this
+    return self.players;
+}
