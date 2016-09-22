@@ -4,9 +4,12 @@ app.factory('socket', function ($rootScope) {
       joinRoom: function(roomName, playerName) {
         socket.emit('joinRoom', roomName, playerName);
       },
-
       updateRoom: function(callback) {
           socket.on('updateRoom', callback);
+      },
+      setEstimate: function(value) {
+        socket.emit('setEstimate', value);
       }
+
   };
 });
