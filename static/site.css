@@ -54,6 +54,42 @@ h1 {
     font-weight: bold;
 }
 
+.room .cards.estimate
+{
+    margin-bottom: 40px;
+}
+
+.room .card.estimate.nocard
+{
+    background: transparent;
+    border: #2d6d2d 2px dashed;
+    box-shadow: none;
+}
+
+.room .card.estimate .playername
+{
+    position: absolute;
+    left: 0px;
+    top: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+.room .card.estimate.nocard .main-point,
+.room .card.estimate.nocard .border,
+.room .card.estimate.nocard .topleft-point,
+.room .card.estimate.nocard .bottomright-point
+{
+    display: none;    
+}
+
+.room .card.estimate.cardsinvisible .main-point,
+.room .card.estimate.cardsinvisible .topleft-point,
+.room .card.estimate.cardsinvisible .bottomright-point
+{
+    display: none;    
+}
+
 .room .card.selected
 {
     border: #8dad8d 4px solid;

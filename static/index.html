@@ -25,13 +25,13 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button id="toggleCards" type="button" class="btn btn-primary btn-lg">Show cards</button>
+                    <button id="toggleCards" type="button" class="btn btn-primary btn-lg" ng-click="toggleCards()">Show cards</button>
                 </div>
                 <div class="col-md-6">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Story" data-bind="value: nextStory">
+                        <input type="text" class="form-control" placeholder="Story" ng-model="nextStory">
                     <span class="input-group-btn">
-                        <button id="next" type="button" class="btn btn-primary btn-lg">Next<span class="fa fa-arrow-right nextarrow"></span></button>
+                        <button id="next" type="button" class="btn btn-primary btn-lg" ng-click="setNextStory()">Next<span class="fa fa-arrow-right nextarrow"></span></button>
                     </span>
                     </div>
                 </div>
@@ -39,13 +39,8 @@
         </div>
 
         <!--TODO: This code needs to be made functional. It is all placeholder copied from the ko implementation-->
-        <div class="row cards">
-            <ul id="cards" >
-                <li class="card-on-table">
-                    <h3></h3>
-                    <p></p>
-                </li>
-            </ul>
+        <div class="cards estimate">
+            <div class="card estimate" ng-repeat="player in players" ng-class="{nocard: player.estimate == '', cardsinvisible: $parent.cardsInvisible === true}"><div class="border"><div class="main-point">{{ player.estimate }}</div></div><div class="topleft-point">{{ player.estimate }}</div><div class="bottomright-point">{{ player.estimate }}</div><div class="playername">{{ player.name }}</div></div>
         </div>
 
         <div class="cards">

@@ -9,6 +9,15 @@ app.factory('socket', function ($rootScope) {
       },
       setEstimate: function(value) {
         socket.emit('setEstimate', value);
+      },
+      toggleCards: function() {
+        socket.emit('toggleCards');
+      },
+      setNextStory: function(nextStory) {
+        socket.emit('nextStory', nextStory);
+      },
+      getSocketId: function() {
+        return socket.id;
       }
 
   };
