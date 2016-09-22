@@ -145,3 +145,29 @@ h1 {
     -o-transform: rotate(-180deg);
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
 }
+
+.roomHeader
+{
+    padding: 0px 20px;
+}
+
+.roomname 
+{
+    font-size: 50px;
+    margin-bottom: 25px;
+}
+
+#storytext, #next, #toggleCards
+{
+    height: 45px;
+}
+
+#currentStory {
+    font-size: 20px;
+    text-align: center;
+}
+
+.noStoryMargin
+{
+    margin-bottom: 52px;
+}

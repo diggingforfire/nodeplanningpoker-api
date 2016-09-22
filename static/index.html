@@ -18,23 +18,25 @@
     </div>
 
     <div class="room ng-hide" ng-show="roomVisible">
-        <!--TODO: This room code needs to be made functional. It is all placeholder copied from the ko implementation-->
-        <div class="roomHeader">
+        <div class="roomHeader" ng-class="{  false:   'noStoryMargin'  } [nextStory != '']">
             <div class="row">
                 <h1 class="roomname">{{ roomName }}</h1>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <button id="toggleCards" type="button" class="btn btn-primary btn-lg" ng-click="toggleCards()">Show cards</button>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Story" ng-model="nextStory">
+                        <input id="storytext" type="text" class="form-control" placeholder="Story" ng-model="nextStory">
                     <span class="input-group-btn">
-                        <button id="next" type="button" class="btn btn-primary btn-lg" ng-click="setNextStory()">Next<span class="fa fa-arrow-right nextarrow"></span></button>
+                        <button id="next" type="button" class="btn btn-primary btn-lg" ng-click="setNextStory()">Next</button>
                     </span>
                     </div>
                 </div>
+            </div>
+            <div class="row" ng-show="nextStory != ''">
+                <h2 id="currentStory">Current story: {{ nextStory }}</h2>
             </div>
         </div>
 
