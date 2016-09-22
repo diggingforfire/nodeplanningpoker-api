@@ -2,6 +2,21 @@ body, html {
     height: 100%;
 }
 
+h1 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+
+@media screen and (min-device-height: 600px) {
+    h1 {
+        font-size:40px;
+    }
+}
+
 .lobby {
     min-height: 75%;
     display: flex;
@@ -18,3 +33,4 @@ body, html {
     max-width: 400px;
     margin-bottom: 25px;
 }
+
