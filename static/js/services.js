@@ -3,6 +3,10 @@ app.factory('socket', function ($rootScope) {
   return {
       joinRoom: function(roomName, playerName) {
         socket.emit('joinRoom', roomName, playerName);
+      },
+      setEstimate: function(value) {
+        socket.emit('setEstimate', value);
       }
+
   };
 });

@@ -4,9 +4,17 @@ app.controller('appCtrl', function($scope, socket) {
     $scope.lobbyVisible = true;
     $scope.roomVisible = false;
 
+    $scope.estimate = -1;
+
     $scope.joinRoom = function() {
         socket.joinRoom($scope.roomName, $scope.playerName);
         $scope.lobbyVisible = false;
         $scope.roomVisible = true;
     };
+
+    $scope.setEstimate = function(value) {
+        socket.setEstimate(value);
+        $scope.estimate = value;
+    };
+    
 });
