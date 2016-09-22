@@ -36,6 +36,6 @@ app.controller('appCtrl', function($scope, socket) {
     };
     
     $scope.toggleCards = function() {
-        socket.toggleCards;
+        socket.toggleCards();
     };
 });

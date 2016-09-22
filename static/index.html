@@ -42,7 +42,7 @@
 
         <!--TODO: This code needs to be made functional. It is all placeholder copied from the ko implementation-->
         <div class="cards estimate">
-            <div class="card estimate" ng-repeat="player in players" ng-class="{nocard: player.estimate == '', cardsinvisible: $parent.cardsInvisible === true}"><div class="border"><div class="main-point">{{ player.estimate }}</div></div><div class="topleft-point">{{ player.estimate }}</div><div class="bottomright-point">{{ player.estimate }}</div><div class="playername">{{ player.name }}</div></div>
+            <div class="card estimate" ng-repeat="player in players" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
         </div>
 
         <div class="cards">
