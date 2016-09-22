@@ -24,6 +24,8 @@ app.controller('appCtrl', function($scope, socket) {
         $scope.roomName = room.name;
         $scope.players = room.players;
         $scope.cardsVisible = room.cardsOpened;
+
+        $scope.$apply();
     });
 
     $scope.setEstimate = function(value) {
