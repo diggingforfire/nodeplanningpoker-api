@@ -5,6 +5,7 @@
     <title>Node Planning Poker</title>
     <meta name="description" content="A simple mobile friendly planning poker tool built with node.js">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
     <link rel="stylesheet" href="static/lib/normalize-css/normalize.css">
     <link rel="stylesheet" href="static/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/site.css">
@@ -47,13 +48,12 @@
             </ul>
         </div>
 
-        <div class="row points">
-            <ul id="points">
-                <li class="card"></li>
-            </ul>
+        <div class="cards">
+            <div class="card" ng-repeat="point in storyPoints"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
         </div>
     </div>
 
+    
     <script src="/socket.io/socket.io.js"></script>
     <script src="static/lib/angular/angular.min.js"></script>
     <script src="static/js/app.js"></script>
