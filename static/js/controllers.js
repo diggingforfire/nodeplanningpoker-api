@@ -1,4 +1,6 @@
 app.controller('appCtrl', function($scope, socket) {
+    $scope.storyPoints = [1, 2, 3, 5, 8, 13, 20, 40, 100, '?', '∞', '🍵'];
+    
     $scope.lobbyVisible = true;
     $scope.roomVisible = false;
 
