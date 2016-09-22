@@ -49,7 +49,7 @@
         </div>
 
         <div class="cards">
-            <div class="card" ng-repeat="point in storyPoints"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
+            <div class="card" ng-repeat="point in storyPoints" ng-class="{selected: point==$parent.estimate}" ng-click="$parent.setEstimate(point)"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
         </div>
     </div>
 

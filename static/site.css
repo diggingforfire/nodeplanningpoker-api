@@ -54,6 +54,11 @@ h1 {
     font-weight: bold;
 }
 
+.room .card.selected
+{
+    border: #8dad8d 4px solid;
+}
+
 .room .card .main-point
 {
     align-self: center;
