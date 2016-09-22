@@ -17,13 +17,12 @@
         <button type="button" class="btn btn-lg btn-primary lobby-item" ng-click="joinRoom()">Join room</button>
     </div>
 
-    <div class="room" ng-show="roomVisible">
+    <div class="room ng-hide" ng-show="roomVisible">
         <!--TODO: This room code needs to be made functional. It is all placeholder copied from the ko implementation-->
         <div class="roomHeader">
             <div class="row">
                 <h1 class="roomname">{{ roomName }}</h1>
             </div>
-
             <div class="row">
                 <div class="col-md-6">
                     <button id="toggleCards" type="button" class="btn btn-primary btn-lg">Show cards</button>
@@ -39,6 +38,7 @@
             </div>
         </div>
 
+        <!--TODO: This code needs to be made functional. It is all placeholder copied from the ko implementation-->
         <div class="row cards">
             <ul id="cards" >
                 <li class="card-on-table">

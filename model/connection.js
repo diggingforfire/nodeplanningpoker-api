@@ -30,6 +30,11 @@ function Connection(lobby, socket, io, disconnect) {
     socket.on('disconnect', function() {
         self.disconnect(disconnect);
     });
+
+    socket.on('getPlayers', function() {
+        var players = self.getPlayers();
+        return players;
+    })
 }
 
 Connection.prototype.joinRoom = function(roomName, playerName) {
@@ -104,6 +109,17 @@ Connection.prototype.disconnect = function(disconnect) {
         disconnect(self);
     }
 };
+
+Connection.prototype.getPlayers = function() {
+    var self = this;
+    var socket = self.socket;
+
+    if (socket.room && socket.player) {
+        logger.log.write('Player ' + socket.player.name + ' Requested all players for room ' + socket.room.name, logger.logType.DEBUG);
+        var players = socket.room.getPlayers();
+        return players;
+    }
+}
 
 Connection.prototype.updateRoom = function(room) {
     var self = this;
