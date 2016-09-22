@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="nodePlanningPoker">
+<html lang="en" ng-app="nodePlanningPoker" ng-controller="appCtrl">
 <head>
     <meta charset="UTF-8">
     <title>Node Planning Poker</title>
@@ -9,15 +9,56 @@
     <link rel="stylesheet" href="static/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/site.css">
 </head>
-<body>
-    
-    <div class="lobby form-group">
-        <input class="lobby-item form-control" type="text" placeholder="Your name" />
-        <input class="lobby-item form-control" type="text" placeholder="Room name" />
-        <button type="button" class="btn btn-lg btn-primary lobby-item">Join room</button>
+<body ng-controller="appCtrl">
+    <div class="lobby form-group" ng-show="lobbyVisible">
+        <input class="lobby-item form-control" type="text" ng-model="playerName" placeholder="Your name" />
+        <input class="lobby-item form-control" type="text" ng-model="roomName" placeholder="Room name" />
+        <button type="button" class="btn btn-lg btn-primary lobby-item" ng-click="joinRoom()">Join room</button>
     </div>
-    
+
+    <div class="room" ng-show="roomVisible">
+        <!--TODO: This room code needs to be made functional. It is all placeholder copied from the ko implementation-->
+        <div class="roomHeader">
+            <div class="row">
+                <h1 ng-model="roomName" class="roomname"></h1>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button id="toggleCards" type="button" class="btn btn-primary btn-lg">Show cards</button>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Story" data-bind="value: nextStory">
+                    <span class="input-group-btn">
+                        <button id="next" type="button" class="btn btn-primary btn-lg">Next<span class="fa fa-arrow-right nextarrow"></span></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cards">
+            <ul id="cards" >
+                <li class="card-on-table">
+                    <h3></h3>
+                    <p></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row points">
+            <ul id="points">
+                <li class="card"></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
     <script src="static/lib/angular/angular.min.js"></script>
     <script src="static/js/app.js"></script>
+    <script src="static/js/services.js"></script>
+    <script src="static/js/controllers.js"></script>
+
 </body>
 </html>
