@@ -7,5 +7,6 @@ function Config() {
 
     self.serverPort = 5050;
     self.mongoConnectionString = 'mongodb://192.168.178.100:27017/nodeplanningpoker';
-    self.logToConsole = process.argv.indexOf('logToConsole') != -1;
+    //self.logToConsole = process.argv.indexOf('logToConsole') != -1;
+    self.logToConsole = 1;
 }
