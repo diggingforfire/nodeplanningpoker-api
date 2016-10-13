@@ -64,7 +64,7 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
             var estimatesEqual = true;
             var commonVal = '';
             var i = 0;
-            debugger;
+
             if (room.players.length == 0){
                 estimatesEqual = false;
             } else {
