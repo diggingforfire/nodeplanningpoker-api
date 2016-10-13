@@ -85,7 +85,9 @@ Connection.prototype.nextStory = function(story) {
     if (socket.room && socket.player) {
 
         socket.room.currentStory = story;
-
+        socket.room.hideCards();
+        socket.room.resetPlayerEstimates();
+logger.log.write(JSON.stringify(socket.room.getPlayers()));
         logger.log.write('Player ' + socket.player.name + ' called next story with subject ' + story, logger.logType.DEBUG);
 
         self.updateRoom(socket.room);

@@ -9,6 +9,7 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
     $scope.playerName = $cookies.get("playerName");
 
     $scope.nextStory = '';
+    $scope.nextStoryEntered = '';
 
     $scope.players = {};
 
@@ -37,7 +38,8 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
     };
 
     $scope.setNextStory = function() {
-        socket.setNextStory($scope.nextStory);
+        socket.setNextStory($scope.nextStoryEntered);
+        $scope.estimate = '';
     };
     
     $scope.toggleCards = function() {
