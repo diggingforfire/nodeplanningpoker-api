@@ -1,0 +1,90 @@
+.room {
+	.card {
+	    cursor: pointer;
+	    background: $theme-card-bg;
+	    border: #cdfdcd 1px solid;
+	    width: 200px;
+	    height: 300px;
+	    border-radius: $general-border-radius;
+	    box-sizing: border-box;
+	    box-shadow: 5px 5px 5px $general-gray;
+	    margin: 10px;
+	    display: inline-flex;
+	    justify-content: center;
+	    position: relative;
+	    font-family: $theme-font;
+	    font-weight: bold;
+
+		&.selected {
+		    border: #8dad8d 4px solid;
+		}
+
+		.border {
+	       align-self: center;
+	       display: inline-flex;
+	       justify-content: center;
+	       width: 148px;
+	       height: 248px;
+	       border-radius: $general-border-radius;
+	       border: 1px solid $general-gray;
+	   }
+
+		.main-point {
+		   align-self: center;
+		   font-size: 70px;
+		   margin-top: -30px;
+		   opacity: 0.8;
+	   }
+
+	   .topleft-point {
+	       position: absolute;
+	       left: 5px;
+	       top: 5px;
+	       width: 32px;
+	       text-align: center;
+	       opacity: 0.8;
+	       font-size: 20px;
+	       margin-top: -5px;
+	   }
+
+	   .bottomright-point {
+			position: absolute;
+			right: 5px;
+			bottom: 5px;
+			width: 32px;
+			text-align: center;
+			opacity: 0.8;
+			font-size: 20px;
+			margin-bottom: -5px;
+			transform: rotate(-180deg);
+	   }
+	}
+
+	.cards {
+		&.estimate {
+		    margin-bottom: 40px;
+
+			&.nocard {
+				background: transparent;
+			    border: #2d6d2d 2px dashed;
+			    box-shadow: none;
+
+				.border {
+				    border: none;
+				}
+
+				.main-point, .topleft-point, .bottomright-point, .main-point, .topleft-point, .bottomright-point {
+				    opacity: 0;
+				}
+			}
+
+			.playername {
+			   position: absolute;
+			   left: 0px;
+			   top: 300px;
+			   width: 100%;
+			   text-align: center;
+		   }
+		}
+	}
+}
