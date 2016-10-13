@@ -1,4 +1,6 @@
-app.controller('appCtrl', function($scope, $cookies, socket) {
+app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
+    var snd = new Audio("static/audio/applause.wav"); 
+
     $scope.storyPoints = [1, 2, 3, 5, 8, 13, 20, 40, 100, '?', '∞', '🍵'];
     
     $scope.lobbyVisible = true;
@@ -24,6 +26,30 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
         $scope.lobbyVisible = false;
         $scope.roomVisible = true;
     };
+    
+    $scope.leaveRoom = function() {
+        socket.leaveRoom();
+        $scope.lobbyVisible = true;
+        $scope.roomVisible = false;
+    };
+
+    $scope.setRoomName = function(value) {
+        $scope.roomName = value;
+    }
+
+    socket.updateRoomList(function(roomList) {
+        var html = "";
+
+        if (roomList.length == 0) {
+            html = "<li>&lt;none&gt;</li>";
+        } else {
+            for(var i = 0 ; i < roomList.length; i++) {
+                html = html + "<li>" + roomList[i] + "</li>";
+            }
+        }
+        $scope.roomList = $sce.trustAsHtml(html);
+        $scope.$apply();
+    });
 
     socket.updateRoom(function(room) {
         $scope.nextStory = room.currentStory;
@@ -34,6 +60,37 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
 
         $scope.storyVisible = room.currentStory != null && room.currentStory != '';
         
+        if ($scope.storyVisible === true && $scope.cardsVisible === true) {
+            var estimatesEqual = true;
+            var commonVal = '';
+            var i = 0;
+            debugger;
+            if (room.players.length == 0){
+                estimatesEqual = false;
+            } else {
+                for (var playerKey in room.players) {
+                    if (room.players.hasOwnProperty(playerKey)) {
+                        if (room.players[playerKey].currentEstimate == null || room.players[playerKey].currentEstimate == '') {
+                            estimatesEqual = false;
+                            break;
+                        }
+                        if (i > 0) {
+                            if (room.players[playerKey].currentEstimate != commonVal) {
+                                estimatesEqual = false;
+                                break;
+                            }
+                        } else {
+                            commonVal = room.players[playerKey].currentEstimate;
+                        }
+                        i++;
+                    }
+                }
+            }
+            if (estimatesEqual === true) {
+                snd.play();
+            }
+        }
+
         $scope.roomHistory = '';
         for (var storyKey in room.history) {
             if (room.history.hasOwnProperty(storyKey)) {
@@ -57,7 +114,6 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
 
     $scope.setNextStory = function() {
         socket.setNextStory($scope.nextStoryEntered);
-        
     };
     
     $scope.toggleCards = function() {
@@ -67,4 +123,6 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
     $scope.resetHistory = function() {
         socket.resetHistory();
     };
+
+    socket.getActiveRooms();
 });
