@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+
+$theme-font: 		'Playfair Display', serif;
+$theme-card-bg:		url(../img/vintage/paper.png);
+$theme-bg-color:	#fff;
+
+@import "_variables";
+@import "_card-room";
+@import "_global";
+@import "_typography";
