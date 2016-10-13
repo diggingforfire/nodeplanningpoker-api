@@ -75,21 +75,6 @@ h1 {
     text-align: center;
 }
 
-.room .card.estimate.nocard .main-point,
-.room .card.estimate.nocard .border,
-.room .card.estimate.nocard .topleft-point,
-.room .card.estimate.nocard .bottomright-point
-{
-    display: none;    
-}
-
-.room .card.estimate.cardsinvisible .main-point,
-.room .card.estimate.cardsinvisible .topleft-point,
-.room .card.estimate.cardsinvisible .bottomright-point
-{
-    display: none;    
-}
-
 .room .card.selected
 {
     border: #8dad8d 4px solid;
@@ -103,6 +88,10 @@ h1 {
     opacity: 0.8;
 }
 
+.room .card.estimate.nocard .border
+{
+    border: none;
+}
 .room .card .border
 {
     align-self: center;
@@ -116,6 +105,15 @@ h1 {
     border: 1px solid #666;
 }
 
+.room .card.estimate.nocard .main-point,
+.room .card.estimate.nocard .topleft-point,
+.room .card.estimate.nocard .bottomright-point,
+.room .card.estimate.cardsinvisible .main-point,
+.room .card.estimate.cardsinvisible .topleft-point,
+.room .card.estimate.cardsinvisible .bottomright-point
+{
+    opacity: 0;
+}
 .room .card .topleft-point
 {
     position: absolute;
