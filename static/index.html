@@ -16,8 +16,13 @@
 <body ng-controller="appCtrl">
     <div class="lobby form-group" ng-show="lobbyVisible">
         <input class="lobby-item form-control" type="text" ng-model="playerName" placeholder="Your name" />
-        <input class="lobby-item form-control" type="text" ng-model="roomName" placeholder="Room name" />
+        <input class="lobby-item form-control" type="text" ng-model="roomName" placeholder="Room name" id="roomName" />
         <button type="button" class="btn btn-lg btn-primary lobby-item" ng-click="joinRoom()">Join room</button>
+        <h1 class="activerooms">Active Rooms</h1>
+        <div class="activerooms">
+            <ul class="activeroomlist"  ng-bind-html="roomList">
+            </ul>
+        </div>
     </div>
 
     <div class="room ng-hide" ng-show="roomVisible">

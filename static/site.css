@@ -116,3 +116,32 @@ h1 {
     width: 100%;
     font-size: 20px;
 }
+
+h1.activerooms
+{
+    font-size:20px;
+    text-align: center;
+    margin-top:50px;
+}
+
+div.activerooms
+{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 200px;
+    min-height: 50px;
+}
+
+div.activerooms ul
+{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.activerooms ul li
+{
+    display: block;
+    cursor: pointer;
+}
