@@ -38,12 +38,7 @@ function Connection(lobby, socket, io, disconnect) {
     socket.on('getPlayers', function() {
         var players = self.getPlayers();
         return players;
-    });
-
-    socket.on('getActiveRooms', function() {
-        var rooms = self.getActiveRooms();
-        return rooms;
-    });
+    })
 }
 
 Connection.prototype.joinRoom = function(roomName, playerName) {
@@ -58,7 +53,6 @@ Connection.prototype.joinRoom = function(roomName, playerName) {
         socket.room = room;
         socket.player = player;
         self.updateRoom(room);
-        self.updateRoomList();
     });
 };
 
@@ -142,28 +136,11 @@ Connection.prototype.getPlayers = function() {
     var socket = self.socket;
 
     if (socket.room && socket.player) {
-        logger.log.write('Player ' + socket.player.name + ' requested all players for room ' + socket.room.name, logger.logType.DEBUG);
+        logger.log.write('Player ' + socket.player.name + ' Requested all players for room ' + socket.room.name, logger.logType.DEBUG);
         var players = socket.room.getPlayers();
         return players;
     }
 }
-
-Connection.prototype.getActiveRooms = function() {
-    var self = this;
-    self.updateRoomList();
-}
-
-Connection.prototype.updateRoomList = function() {
-    var self = this;
-    var rooms = [];
-    for (var key in self.lobby.rooms) {
-        if (self.lobby.rooms.hasOwnProperty(key)) {
-            rooms[rooms.length] = key;
-        }
-    }
-
-    self.io.sockets.emit('updateRoomList', rooms);
-};
 
 Connection.prototype.updateRoom = function(room) {
     var self = this;
