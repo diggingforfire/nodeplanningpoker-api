@@ -4,12 +4,14 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
     $scope.lobbyVisible = true;
     $scope.roomVisible = false;
     $scope.cardsVisible = false;
+    $scope.storyVisible = false;
 
     $scope.roomName = $cookies.get("roomName");
     $scope.playerName = $cookies.get("playerName");
 
     $scope.nextStory = '';
     $scope.nextStoryEntered = '';
+    $scope.roomHistroy = '';
 
     $scope.players = {};
 
@@ -28,6 +30,22 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
         $scope.roomName = room.name;
         $scope.players = room.players;
         $scope.cardsVisible = room.cardsOpened;
+        $scope.estimate = room.players[ $scope.playerName].currentEstimate;
+
+        $scope.storyVisible = room.currentStory != null && room.currentStory != '';
+        
+        $scope.roomHistory = '';
+        for (var storyKey in room.history) {
+            if (room.history.hasOwnProperty(storyKey)) {
+                $scope.roomHistory = $scope.roomHistory + "<b>" + storyKey + "</b><br/>";
+                for (var playerKey in room.history[storyKey]) {
+                    if (room.history[storyKey].hasOwnProperty(playerKey)) {
+                        $scope.roomHistory = $scope.roomHistory + "&nbsp;&nbsp;&nbsp;" + room.history[storyKey][playerKey].name + ": " + room.history[storyKey][playerKey].estimate + "</b><br/>";
+                    }
+                }
+                $scope.roomHistory = $scope.roomHistory + "<br/>";
+            }
+        }
 
         $scope.$apply();
     });
@@ -39,10 +57,14 @@ app.controller('appCtrl', function($scope, $cookies, socket) {
 
     $scope.setNextStory = function() {
         socket.setNextStory($scope.nextStoryEntered);
-        $scope.estimate = '';
+        
     };
     
     $scope.toggleCards = function() {
         socket.toggleCards();
+    };
+
+    $scope.resetHistory = function() {
+        socket.resetHistory();
     };
 });

@@ -13,6 +13,9 @@ app.factory('socket', function ($rootScope) {
       toggleCards: function() {
         socket.emit('toggleCards');
       },
+      resetHistory: function() {
+        socket.emit('resetHistory');
+      },
       setNextStory: function(nextStory) {
         socket.emit('nextStory', nextStory);
       },

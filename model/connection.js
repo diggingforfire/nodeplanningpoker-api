@@ -23,6 +23,10 @@ function Connection(lobby, socket, io, disconnect) {
         self.toggleCards();
     });
 
+    socket.on('resetHistory', function() {
+        self.resetHistory();
+    });
+
     socket.on('nextStory', function(story) {
         self.nextStory(story);
     });
@@ -78,16 +82,31 @@ Connection.prototype.toggleCards = function() {
     }
 };
 
+
+Connection.prototype.resetHistory = function() {
+    var self = this;
+    var socket = self.socket;
+
+    if (socket.room && socket.player) {
+        socket.room.resetHistory();
+
+        logger.log.write('Player ' + socket.player.name + ' reset room history ', logger.logType.DEBUG, socket.room);
+
+        self.updateRoom(socket.room);
+    }
+};
+
+
 Connection.prototype.nextStory = function(story) {
     var self = this;
     var socket = self.socket;
 
     if (socket.room && socket.player) {
-
+        socket.room.addStoryToHistory();
         socket.room.currentStory = story;
         socket.room.hideCards();
         socket.room.resetPlayerEstimates();
-logger.log.write(JSON.stringify(socket.room.getPlayers()));
+
         logger.log.write('Player ' + socket.player.name + ' called next story with subject ' + story, logger.logType.DEBUG);
 
         self.updateRoom(socket.room);

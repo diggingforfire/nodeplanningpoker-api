@@ -169,3 +169,60 @@ h1 {
 {
     margin-bottom: 52px;
 }
+
+.card-table
+{
+    display: inline-block;
+    min-width: 300px;
+    width: 70%;
+}
+
+.history
+{
+    display: inline-block;
+    min-width: 100px;
+    width: 25%;
+    padding: 10px;
+    margin: 0px;
+    vertical-align: top;
+}
+
+.history h1
+{
+    font-size: 20px;
+    text-align: center;
+
+}
+
+.history .historycontent
+{
+    text-align: left;
+    border: 1px solid #ccc;
+    min-height: 400px;
+    padding: 10px;
+}
+
+.buttondiv
+{
+    float:left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.storyinput
+{
+    float: right;
+    width: 300px;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.nostory
+{
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+}
