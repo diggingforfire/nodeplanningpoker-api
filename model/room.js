@@ -16,9 +16,23 @@ Room.prototype.addPlayer = function(player) {
     self.players[player.name] = player;
 };
 
+Room.prototype.resetPlayerEstimates = function(player) {
+    var self = this;
+    for (var key in self.players) {
+        if (self.players.hasOwnProperty(key)) {
+            self.players[key].currentEstimate = '';
+        }
+    }
+};
+
 Room.prototype.removePlayerByName = function(playerName) {
     var self = this;
     delete self.players[playerName];
+};
+
+Room.prototype.hideCards = function() {
+    var self = this;
+    self.cardsOpened = false;
 };
 
 Room.prototype.toggleCards = function() {
