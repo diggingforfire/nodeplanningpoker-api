@@ -1,3 +1,3 @@
 'use strict';
 
-var app = angular.module('nodePlanningPoker', ['ngCookies']);
+var app = angular.module('nodePlanningPoker', ['ngCookies', 'ngSanitize']);

@@ -23,10 +23,13 @@
                 <h1 class="roomname">{{ roomName }}</h1>
             </div>
             <div class="row">
-                <div class="col-md-7">
+                <div class="buttondiv">
                     <button id="toggleCards" type="button" class="btn btn-primary btn-lg" ng-click="toggleCards()">Show cards</button>
                 </div>
-                <div class="col-md-5">
+                <div class="buttondiv">
+                    <button id="resetHistory" type="button" class="btn btn-primary btn-lg" ng-click="resetHistory()">Reset history</button>
+                </div>
+                <div class="storyinput">
                     <div class="input-group">
                         <input id="storytext" type="text" class="form-control" placeholder="Story" ng-model="nextStoryEntered">
                     <span class="input-group-btn">
@@ -39,13 +42,22 @@
                 <h2 id="currentStory">Current story: {{ nextStory }}</h2>
             </div>
         </div>
+        <div class="card-table ng-hide" ng-show="storyVisible">
+            <div class="cards estimate">
+                <div class="card estimate" ng-repeat="player in players" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
+            </div>
 
-        <div class="cards estimate">
-            <div class="card estimate" ng-repeat="player in players" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
+            <div class="cards">
+                <div class="card" ng-repeat="point in storyPoints" ng-class="{selected: point==$parent.estimate}" ng-click="$parent.setEstimate(point)"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
+            </div>
         </div>
-
-        <div class="cards">
-            <div class="card" ng-repeat="point in storyPoints" ng-class="{selected: point==$parent.estimate}" ng-click="$parent.setEstimate(point)"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
+        <div class="history ng-hide" ng-show="storyVisible">
+            <h1>History</h1>
+            <div class="historycontent" ng-bind-html="roomHistory">
+            </div>
+        </div>
+        <div class="nostory ng-hide" ng-show="!storyVisible">
+            No story currently selected
         </div>
     </div>
 
@@ -53,6 +65,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="static/lib/angular/angular.min.js"></script>
     <script src="static/lib/angular/angular-cookies.js"></script>
+    <script src="static/lib/angular/angular-sanitize.min.js"></script>
     <script src="static/js/app.js"></script>
     <script src="static/js/services.js"></script>
     <script src="static/js/controllers.js"></script>
