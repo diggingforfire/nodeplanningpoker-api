@@ -16,7 +16,7 @@
   position: relative;
   font-family: "Playfair Display", serif;
   font-weight: bold; }
-  .room .card .selected {
+  .room .card.selected {
     border: #8dad8d 4px solid; }
   .room .card .border {
     -ms-flex-item-align: center;
@@ -55,23 +55,24 @@
     font-size: 20px;
     margin-bottom: -5px;
     transform: rotate(-180deg); }
-
-.room .cards.estimate {
-  margin-bottom: 40px; }
-  .room .cards.estimate .playername {
-    position: absolute;
-    left: 0px;
-    top: 300px;
-    width: 100%;
-    text-align: center; }
-  .room .cards.estimate.nocard {
-    background: transparent;
-    border: #2d6d2d 2px dashed;
-    box-shadow: none; }
-    .room .cards.estimate.nocard .border {
-      border: none; }
-    .room .cards.estimate.nocard .main-point, .room .cards.estimate.nocard .topleft-point, .room .cards.estimate.nocard .bottomright-point, .room .cards.estimate.nocard .main-point, .room .cards.estimate.nocard .topleft-point, .room .cards.estimate.nocard .bottomright-point {
+  .room .card.estimate {
+    margin-bottom: 40px; }
+    .room .card.estimate.nocard {
+      background: transparent;
+      border: #2d6d2d 2px dashed;
+      box-shadow: none; }
+      .room .card.estimate.nocard .border {
+        border: none; }
+      .room .card.estimate.nocard .main-point, .room .card.estimate.nocard .topleft-point, .room .card.estimate.nocard .bottomright-point, .room .card.estimate.nocard .main-point, .room .card.estimate.nocard .topleft-point, .room .card.estimate.nocard .bottomright-point {
+        opacity: 0; }
+    .room .card.estimate.cardsinvisible .main-point, .room .card.estimate.cardsinvisible .topleft-point, .room .card.estimate.cardsinvisible .bottomright-point, .room .card.estimate.cardsinvisible .main-point, .room .card.estimate.cardsinvisible .topleft-point, .room .card.estimate.cardsinvisible .bottomright-point {
       opacity: 0; }
+    .room .card.estimate .playername {
+      position: absolute;
+      left: 0px;
+      top: 300px;
+      width: 100%;
+      text-align: center; }
 
 body, html {
   height: 100%;
@@ -123,7 +124,7 @@ body, html {
   min-width: 100px;
   width: 25%;
   padding: 10px;
-  margin: 0;
+  margin: 0px;
   vertical-align: top; }
   .history h1 {
     font-size: 20px;
@@ -153,6 +154,25 @@ body, html {
   text-align: center;
   width: 100%;
   font-size: 20px; }
+
+h1.activerooms {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 50px; }
+
+div.activerooms {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 200px;
+  min-height: 50px; }
+  div.activerooms ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+    div.activerooms ul li {
+      display: block;
+      cursor: pointer; }
 
 h1 {
   font-family: 'Helvetica Neue', sans-serif;
