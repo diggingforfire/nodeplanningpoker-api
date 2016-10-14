@@ -58,10 +58,8 @@
 			margin-bottom: -5px;
 			transform: rotate(-180deg);
 	   }
-	}
 
-	.cards {
-		&.estimate {
+	   &.estimate {
 		    margin-bottom: 40px;
 
 			&.nocard {
@@ -77,6 +75,13 @@
 				    opacity: 0;
 				}
 			}
+
+			&.cardsinvisible {
+
+				.main-point, .topleft-point, .bottomright-point, .main-point, .topleft-point, .bottomright-point {
+				    opacity: 0;
+				}
+			}			
 
 			.playername {
 			   position: absolute;
