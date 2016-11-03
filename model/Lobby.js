@@ -1,7 +1,7 @@
 'use strict';
 
-var Room = require('./room');
-var Player = require('./player');
+var Room = require('./Room');
+var Player = require('./Player');
 
 module.exports = function Lobby() {
     var self = this;

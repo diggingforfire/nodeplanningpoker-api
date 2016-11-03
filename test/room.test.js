@@ -1,8 +1,8 @@
 'use strict';
 
 var should = require('should');
-var Room = require('../model/room');
-var Player = require('../model/player');
+var Room = require('../model/Room');
+var Player = require('../model/Player');
 
 describe('Room', function() {
 
