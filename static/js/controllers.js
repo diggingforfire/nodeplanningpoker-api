@@ -10,6 +10,7 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
 
     $scope.roomName = $cookies.get("roomName");
     $scope.playerName = $cookies.get("playerName");
+    $scope.isObserver = ($cookies.get("isObserver") === undefined || $cookies.get("isObserver") === null || $cookies.get("isObserver") === "false" || $cookies.get("isObserver") === false) ? false : true;
 
     $scope.nextStory = '';
     $scope.nextStoryEntered = '';
@@ -20,9 +21,10 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
     $scope.estimate = -1;
 
     $scope.joinRoom = function() {
-        socket.joinRoom($scope.roomName, $scope.playerName);
+        socket.joinRoom($scope.roomName, $scope.playerName, $scope.isObserver);
         $cookies.put("roomName", $scope.roomName);
         $cookies.put("playerName", $scope.playerName);
+        $cookies.put("isObserver", $scope.isObserver);
         $scope.lobbyVisible = false;
         $scope.roomVisible = true;
     };
@@ -38,16 +40,7 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
     }
 
     socket.updateRoomList(function(roomList) {
-        var html = "";
-
-        if (roomList.length == 0) {
-            html = "<li>&lt;none&gt;</li>";
-        } else {
-            for(var i = 0 ; i < roomList.length; i++) {
-                html = html + "<li>" + roomList[i] + "</li>";
-            }
-        }
-        $scope.roomList = $sce.trustAsHtml(html);
+        $scope.roomList = roomList;
         $scope.$apply();
     });
 
@@ -56,7 +49,8 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
         $scope.roomName = room.name;
         $scope.players = room.players;
         $scope.cardsVisible = room.cardsOpened;
-        $scope.estimate = room.players[ $scope.playerName].currentEstimate;
+        if (room.players[$scope.playerName].isObserver === false)
+            $scope.estimate = room.players[$scope.playerName].currentEstimate;
 
         $scope.storyVisible = room.currentStory != null && room.currentStory != '';
         
@@ -69,7 +63,7 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
                 estimatesEqual = false;
             } else {
                 for (var playerKey in room.players) {
-                    if (room.players.hasOwnProperty(playerKey)) {
+                    if (room.players.hasOwnProperty(playerKey) && room.players[playerKey].isObserver === false) {
                         if (room.players[playerKey].currentEstimate == null || room.players[playerKey].currentEstimate == '') {
                             estimatesEqual = false;
                             break;

@@ -11,8 +11,8 @@ function Connection(lobby, socket, io, disconnect) {
     self.socket = socket;
     self.io = io;
 
-    socket.on('joinRoom', function(roomName, playerName) {
-        self.joinRoom(roomName, playerName);
+    socket.on('joinRoom', function(roomName, playerName, isObserver) {
+        self.joinRoom(roomName, playerName, isObserver);
     });
 
     socket.on('setEstimate', function(estimate) {
@@ -46,11 +46,11 @@ function Connection(lobby, socket, io, disconnect) {
     });
 }
 
-Connection.prototype.joinRoom = function(roomName, playerName) {
+Connection.prototype.joinRoom = function(roomName, playerName, isObserver) {
     var self = this;
     var socket = self.socket;
 
-    self.lobby.joinRoom(roomName, playerName, socket.id, function(room, player) {
+    self.lobby.joinRoom(roomName, playerName, socket.id, isObserver, function(room, player) {
 
         logger.log.write('Player ' + playerName + ' joined room ' + roomName, logger.logType.DEBUG);
 

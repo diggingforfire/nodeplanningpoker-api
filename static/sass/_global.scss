@@ -9,6 +9,10 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .checkbox {
+        display:inline-block;
+    }
 }
 
 .lobby-item {

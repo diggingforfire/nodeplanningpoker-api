@@ -31,7 +31,7 @@ Room.prototype.addStoryToHistory = function() {
     var estimates = {};
 
     for (var key in self.players) {
-        if (self.players.hasOwnProperty(key)) {
+        if (self.players.hasOwnProperty(key) && self.players[key].isObserver === false) {
             estimates[key] = {};
             estimates[key].name = self.players[key].name;
             estimates[key].estimate = self.players[key].currentEstimate;
@@ -43,7 +43,7 @@ Room.prototype.addStoryToHistory = function() {
 Room.prototype.resetPlayerEstimates = function(player) {
     var self = this;
     for (var key in self.players) {
-        if (self.players.hasOwnProperty(key)) {
+        if (self.players.hasOwnProperty(key) && self.players[key].isObserver === false) {
             self.players[key].currentEstimate = '';
         }
     }

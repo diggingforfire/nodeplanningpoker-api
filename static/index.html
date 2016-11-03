@@ -15,10 +15,12 @@
     <div class="lobby form-group" ng-show="lobbyVisible">
         <input class="lobby-item form-control" type="text" ng-model="playerName" placeholder="Your name" />
         <input class="lobby-item form-control" type="text" ng-model="roomName" placeholder="Room name" id="roomName" />
+        <input class="checkbox" type="checkbox" ng-model="isObserver" /><label>Is Observer</label>
         <button type="button" class="btn btn-lg btn-primary lobby-item" ng-click="joinRoom()">Join room</button>
         <h1 class="activerooms">Active Rooms</h1>
         <div class="activerooms">
-            <ul class="activeroomlist"  ng-bind-html="roomList">
+            <ul class="activeroomlist">
+                <li ng-repeat="room in roomList" ng-click="setRoomName(room)">{{ room }}</li>
             </ul>
         </div>
     </div>
@@ -26,7 +28,7 @@
     <div class="room ng-hide" ng-show="roomVisible">
         <div class="roomHeader" ng-class="{  false:   'noStoryMargin'  } [nextStory != '']">
             <div class="row">
-                <h1 class="roomname">{{ roomName }}</h1>
+                <h1 class="roomname">{{ roomName }} - {{ playerName }}</h1>
             </div>
             <div class="row">
                 <div class="buttondiv">
@@ -50,10 +52,10 @@
         </div>
         <div class="card-table ng-hide" ng-show="storyVisible">
             <div class="cards estimate">
-                <div class="card estimate" ng-repeat="player in players" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
+                <div class="card estimate" ng-repeat="player in players" ng-show="!player.isObserver" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
             </div>
 
-            <div class="cards">
+            <div class="cards hand" ng-show="!isObserver">
                 <div class="card" ng-repeat="point in storyPoints" ng-class="{selected: point==$parent.estimate}" ng-click="$parent.setEstimate(point)"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
             </div>
         </div>
