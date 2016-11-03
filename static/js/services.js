@@ -1,5 +1,5 @@
 app.factory('socket', function ($rootScope) {
-  var socket = io.connect(), {reconnect: true});
+  var socket = io.connect();
   return {
       joinRoom: function(roomName, playerName, isObserver) {
         socket.emit('joinRoom', roomName, playerName, isObserver);
