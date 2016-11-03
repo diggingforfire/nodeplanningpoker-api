@@ -44,6 +44,11 @@ function Connection(lobby, socket, io, disconnect) {
         var rooms = self.getActiveRooms();
         return rooms;
     });
+
+    socket.on('getActivePlayers', function(room) {
+        var players = self.getActivePlayers(room);
+        return players;
+    });
 }
 
 Connection.prototype.joinRoom = function(roomName, playerName, isObserver) {
@@ -163,6 +168,25 @@ Connection.prototype.updateRoomList = function() {
     }
 
     self.io.sockets.emit('updateRoomList', rooms);
+};
+
+Connection.prototype.getActivePlayers = function(room) {
+    var self = this;
+    self.updatePlayerList(room);
+}
+
+Connection.prototype.updatePlayerList = function(room) {
+    var self = this;
+    var players = [];
+    if (room != undefined && room != null && room != '' && self.lobby.rooms[room] != undefined && self.lobby.rooms[room] != null)
+    {    
+        for (var key in self.lobby.rooms[room].players) {
+            if (self.lobby.rooms[room].players.hasOwnProperty(key)) {
+                players[players.length] = { name: key, isObserver: self.lobby.rooms[room].players[key].isObserver };
+            }
+        }
+    }
+    self.io.sockets.emit('updatePlayerList', players);
 };
 
 Connection.prototype.updateRoom = function(room) {

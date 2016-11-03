@@ -23,6 +23,12 @@
                 <li ng-repeat="room in roomList" ng-click="setRoomName(room)">{{ room }}</li>
             </ul>
         </div>
+        <h1 class="activeplayers" ng-show="playerList.length > 0">Active Players - {{ roomName }}</h1>
+        <div class="activeplayers" ng-show="playerList.length > 0">
+            <ul class="activeplayerlist">
+                <li ng-repeat="player in playerList">{{ player.name }} <span ng-show="player.isObserver">(observer)</span></li>
+            </ul>
+        </div>
     </div>
 
     <div class="room ng-hide" ng-show="roomVisible">

@@ -13,8 +13,14 @@ app.factory('socket', function ($rootScope) {
       updateRoomList: function(callback) {
           socket.on('updateRoomList', callback);
       },
+      updatePlayerList: function(callback) {
+          socket.on('updatePlayerList', callback);
+      },
       getActiveRooms: function(roomList) {
           socket.emit('getActiveRooms', roomList);
+      },
+      getActivePlayers: function(room, playerList) {
+          socket.emit('getActivePlayers', room, playerList);
       },
       setEstimate: function(value) {
         socket.emit('setEstimate', value);

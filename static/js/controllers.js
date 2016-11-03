@@ -37,10 +37,16 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
 
     $scope.setRoomName = function(value) {
         $scope.roomName = value;
+        socket.getActivePlayers($scope.roomName);
     }
 
     socket.updateRoomList(function(roomList) {
         $scope.roomList = roomList;
+        $scope.$apply();
+    });
+
+    socket.updatePlayerList(function(playerList) {
+        $scope.playerList = playerList;
         $scope.$apply();
     });
 
@@ -120,4 +126,6 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
     };
 
     socket.getActiveRooms();
+    socket.getActivePlayers($scope.roomName);
+
 });
