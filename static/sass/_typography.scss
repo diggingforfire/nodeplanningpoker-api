@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Asap:700');
+
+body {
+	font-family: 'Asap', sans-serif;
+	color: $text-color;
+}
+
 h1 {
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: bold;
-    letter-spacing: -1px;
     line-height: 1;
     text-align: center;
 

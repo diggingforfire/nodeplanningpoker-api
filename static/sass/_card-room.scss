@@ -5,7 +5,7 @@
 		.card {
 			position: absolute;
 			top: 250px;
-			left: 180px;	
+			left: 180px;
 		}
 
 		.card:nth-child(1) { transform: rotate(-60deg) translate(100px, -150px); }
@@ -83,11 +83,9 @@
 	   }
 
 	   &.estimate {
-		    margin-bottom: 40px;
-
 			&.nocard {
 				background: transparent;
-			    border: #2d6d2d 2px dashed;
+			    border: $blue 2px dashed;
 			    box-shadow: none;
 
 				.border {
@@ -104,11 +102,11 @@
 				.main-point, .topleft-point, .bottomright-point, .main-point, .topleft-point, .bottomright-point {
 				    opacity: 0;
 				}
-			}			
+			}
 
 			.playername {
 			   position: absolute;
-			   left: 0px;
+			   left: 0;
 			   top: 300px;
 			   width: 100%;
 			   text-align: center;

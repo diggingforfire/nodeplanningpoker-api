@@ -12,70 +12,77 @@
 
 </head>
 <body ng-controller="appCtrl">
-    <div class="lobby form-group" ng-show="lobbyVisible">
-        <input class="lobby-item form-control" type="text" ng-model="playerName" placeholder="Your name" />
-        <input class="lobby-item form-control" type="text" ng-model="roomName" placeholder="Room name" id="roomName" />
-        <input class="checkbox" type="checkbox" ng-model="isObserver" /><label>Is Observer</label>
-        <button type="button" class="btn btn-lg btn-primary lobby-item" ng-click="joinRoom()">Join room</button>
-        <h1 class="activerooms">Active Rooms</h1>
-        <div class="activerooms">
-            <ul class="activeroomlist">
-                <li ng-repeat="room in roomList" ng-click="setRoomName(room)">{{ room }}</li>
-            </ul>
-        </div>
-        <h1 class="activeplayers" ng-show="playerList.length > 0">Active Players - {{ roomName }}</h1>
-        <div class="activeplayers" ng-show="playerList.length > 0">
-            <ul class="activeplayerlist">
-                <li ng-repeat="player in playerList">{{ player.name }} <span ng-show="player.isObserver">(observer)</span></li>
-            </ul>
-        </div>
-    </div>
+	<div class="contents">
 
-    <div class="room ng-hide" ng-show="roomVisible">
-        <div class="roomHeader" ng-class="{  false:   'noStoryMargin'  } [nextStory != '']">
-            <div class="row">
-                <h1 class="roomname">{{ roomName }} - {{ playerName }}</h1>
-            </div>
-            <div class="row">
-                <div class="buttondiv">
-                    <button id="toggleCards" type="button" class="btn btn-primary btn-lg" ng-click="toggleCards()">Show cards</button>
-                </div>
-                <div class="buttondiv">
-                    <button id="resetHistory" type="button" class="btn btn-primary btn-lg" ng-click="resetHistory()">Reset history</button>
-                </div>
-                <div class="storyinput">
-                    <div class="input-group">
-                        <input id="storytext" type="text" class="form-control" placeholder="Story" ng-model="nextStoryEntered">
-                    <span class="input-group-btn">
-                        <button id="next" type="button" class="btn btn-primary btn-lg" ng-click="setNextStory()">Next</button>
-                    </span>
-                    </div>
-                </div>
-            </div>
-            <div class="row" ng-show="nextStory != ''">
-                <h2 id="currentStory">Current story: {{ nextStory }}</h2>
-            </div>
-        </div>
-        <div class="card-table ng-hide" ng-show="storyVisible">
-            <div class="cards estimate">
-                <div class="card estimate" ng-repeat="player in players" ng-show="!player.isObserver" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
-            </div>
+	    <div class="lobby form-group" ng-show="lobbyVisible">
+	        <input class="lobby-item form-control" type="text" ng-model="playerName" placeholder="Your name" />
+	        <input class="lobby-item form-control" type="text" ng-model="roomName" placeholder="Room name" id="roomName" />
+	        <input class="checkbox" type="checkbox" ng-model="isObserver" /><label>Is Observer</label>
+	        <button type="button" class="btn btn-lg btn-primary lobby-item" ng-click="joinRoom()">Join room</button>
+	        <h1 class="activerooms">Active Rooms</h1>
+	        <div class="activerooms">
+	            <ul class="activeroomlist">
+	                <li ng-repeat="room in roomList" ng-click="setRoomName(room)">{{ room }}</li>
+	            </ul>
+	        </div>
 
-            <div class="cards hand" ng-show="!isObserver">
-                <div class="card" ng-repeat="point in storyPoints" ng-class="{selected: point==$parent.estimate}" ng-click="$parent.setEstimate(point)"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
-            </div>
-        </div>
-        <div class="history ng-hide" ng-show="storyVisible">
-            <h1>History</h1>
-            <div class="historycontent" ng-bind-html="roomHistory">
-            </div>
-        </div>
-        <div class="nostory ng-hide" ng-show="!storyVisible">
-            No story currently selected
-        </div>
-    </div>
+       		<h1 class="activeplayers" ng-show="playerList.length > 0">Active Players - {{ roomName }}</h1>
+        	<div class="activeplayers" ng-show="playerList.length > 0">
+            	<ul class="activeplayerlist">
+                	<li ng-repeat="player in playerList">{{ player.name }} <span ng-show="player.isObserver">(observer)</span></li>
+            	</ul>
+        	</div>
+	    </div>
 
-    
+	    <div class="room ng-hide" ng-show="roomVisible">
+	        <div class="roomHeader" ng-class="{  false:   'noStoryMargin'  } [nextStory != '']">
+
+	            <div class="row">
+	                <h1 class="roomname">{{ roomName }} - {{ playerName }}</h1>
+	            </div>
+
+	            <div class="controls">
+					<span>
+		                <button id="toggleCards" type="button" class="btn btn-primary btn-lg" ng-click="toggleCards()">Show cards</button>
+		                <button id="resetHistory" type="button" class="btn btn-primary btn-lg" ng-click="resetHistory()">Reset history</button>
+					</span>
+
+	                <div class="storyinput">
+	                    <div class="input-group">
+	                        <input id="storytext" type="text" class="form-control" placeholder="Story" ng-model="nextStoryEntered">
+	                    <span class="input-group-btn">
+	                        <button id="next" type="button" class="btn btn-primary btn-lg" ng-click="setNextStory()">Next</button>
+	                    </span>
+	                    </div>
+	                </div>
+	            </div>
+
+				<div class="row">
+		            <h2 id="currentStory" ng-show="nextStory != ''">Current story: {{ nextStory }}</h2>
+					<h2 class="nostory ng-hide" ng-show="!storyVisible">No story currently selected</h2>
+				</div>
+	        </div>
+
+	        <div class="cards-history ng-hide" ng-show="storyVisible">
+	            <div class="cards estimate-ctn">
+	                <div class="card estimate" ng-repeat="player in players" ng-show="!player.isObserver" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
+	            </div>
+
+				<div class="history" ng-show="storyVisible">
+		            <h1>History</h1>
+		            <div class="historycontent" ng-bind-html="roomHistory"></div>
+		        </div>
+	        </div>
+
+			<div class="cards hand ng-hide" ng-show="!isObserver">
+				<div class="card" ng-repeat="point in storyPoints" ng-class="{selected: point==$parent.estimate}" ng-click="$parent.setEstimate(point)"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
+			</div>
+
+	    </div>
+
+	</div>
+
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="static/lib/angular/angular.min.js"></script>
     <script src="static/lib/angular/angular-cookies.js"></script>

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Playfair+Display");
+@import url("https://fonts.googleapis.com/css?family=Asap:700");
 .room .hand {
   position: relative; }
   .room .hand .card {
@@ -86,31 +87,34 @@
     font-size: 20px;
     margin-bottom: -5px;
     transform: rotate(-180deg); }
-  .room .card.estimate {
-    margin-bottom: 40px; }
-    .room .card.estimate.nocard {
-      background: transparent;
-      border: #2d6d2d 2px dashed;
-      box-shadow: none; }
-      .room .card.estimate.nocard .border {
-        border: none; }
-      .room .card.estimate.nocard .main-point, .room .card.estimate.nocard .topleft-point, .room .card.estimate.nocard .bottomright-point, .room .card.estimate.nocard .main-point, .room .card.estimate.nocard .topleft-point, .room .card.estimate.nocard .bottomright-point {
-        opacity: 0; }
-    .room .card.estimate.cardsinvisible .main-point, .room .card.estimate.cardsinvisible .topleft-point, .room .card.estimate.cardsinvisible .bottomright-point, .room .card.estimate.cardsinvisible .main-point, .room .card.estimate.cardsinvisible .topleft-point, .room .card.estimate.cardsinvisible .bottomright-point {
+  .room .card.estimate.nocard {
+    background: transparent;
+    border: #337ab7 2px dashed;
+    box-shadow: none; }
+    .room .card.estimate.nocard .border {
+      border: none; }
+    .room .card.estimate.nocard .main-point, .room .card.estimate.nocard .topleft-point, .room .card.estimate.nocard .bottomright-point, .room .card.estimate.nocard .main-point, .room .card.estimate.nocard .topleft-point, .room .card.estimate.nocard .bottomright-point {
       opacity: 0; }
-    .room .card.estimate .playername {
-      position: absolute;
-      left: 0px;
-      top: 300px;
-      width: 100%;
-      text-align: center; }
+  .room .card.estimate.cardsinvisible .main-point, .room .card.estimate.cardsinvisible .topleft-point, .room .card.estimate.cardsinvisible .bottomright-point, .room .card.estimate.cardsinvisible .main-point, .room .card.estimate.cardsinvisible .topleft-point, .room .card.estimate.cardsinvisible .bottomright-point {
+    opacity: 0; }
+  .room .card.estimate .playername {
+    position: absolute;
+    left: 0;
+    top: 300px;
+    width: 100%;
+    text-align: center; }
 
 body, html {
   height: 100%;
   background-color: #fff; }
 
+.contents {
+  padding: 40px;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%; }
+
 .lobby {
-  min-height: 75%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -130,63 +134,60 @@ body, html {
   max-width: 400px;
   margin-bottom: 25px; }
 
-.roomHeader {
-  padding: 0 20px; }
-
-.roomname {
-  font-size: 50px;
-  margin-bottom: 25px; }
-
 #storytext, #next, #toggleCards {
   height: 45px; }
 
-#currentStory {
+#currentStory, .nostory {
   font-size: 20px;
   text-align: center; }
 
-.noStoryMargin {
-  margin-bottom: 52px; }
+.controls {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 20px;
+  border-radius: 15px;
+  border: 2px solid #FCAE05;
+  padding: 20px; }
+  .controls button {
+    margin-right: 40px; }
+  .controls .storyinput {
+    width: 300px; }
+    .controls .storyinput button {
+      margin-right: 0; }
 
-.card-table {
-  display: inline-block;
-  min-width: 300px;
-  width: 70%; }
-
-.history {
-  display: inline-block;
-  min-width: 100px;
-  width: 25%;
-  padding: 10px;
-  margin: 0px;
-  vertical-align: top; }
-  .history h1 {
-    font-size: 20px;
-    text-align: center; }
-  .history .historycontent {
-    text-align: left;
-    border: 1px solid #ccc;
-    min-height: 400px;
-    padding: 10px; }
-
-.buttondiv {
-  float: left;
-  position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px; }
-
-.storyinput {
-  float: right;
-  width: 300px;
-  position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px; }
-
-.nostory {
-  text-align: center;
-  width: 100%;
-  font-size: 20px; }
+.cards-history {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .cards-history .estimate-ctn {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding-top: 40px; }
+    .cards-history .estimate-ctn .card {
+      padding: 0 20px; }
+  .cards-history .history {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto; }
+    .cards-history .history h1 {
+      font-size: 20px; }
+    .cards-history .history .historycontent {
+      border-radius: 15px;
+      border: 2px solid #337ab7;
+      height: 300px;
+      width: 200px;
+      padding: 10px;
+      margin: 0 20px; }
+      .cards-history .history .historycontent .history-st-name {
+        display: block;
+        font-weight: bold; }
+      .cards-history .history .historycontent .player {
+        padding-left: 10px;
+        color: #337ab7; }
 
 h1.activerooms {
   font-size: 20px;
@@ -207,30 +208,13 @@ div.activerooms {
       display: block;
       cursor: pointer; }
 
-h1.activeplayers {
-  font-size: 20px;
-  text-align: center;
-  margin-top: 50px; }
-
-div.activeplayers {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  min-width: 200px;
-  min-height: 50px; }
-  div.activeplayers ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0; }
-    div.activeplayers ul li {
-      display: block;
-      cursor: pointer; }
+body {
+  font-family: 'Asap', sans-serif;
+  color: #333; }
 
 h1 {
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
-  letter-spacing: -1px;
   line-height: 1;
   text-align: center; }
   @media screen and (min-device-height: 600px) {

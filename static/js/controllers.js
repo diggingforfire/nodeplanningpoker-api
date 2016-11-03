@@ -1,8 +1,8 @@
 app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
-    var snd = new Audio("static/audio/applause.wav"); 
+    var snd = new Audio("static/audio/applause.wav");
 
     $scope.storyPoints = [1, 2, 3, 5, 8, 13, 20, 40, 100, '?', '∞', '🍵'];
-    
+
     $scope.lobbyVisible = true;
     $scope.roomVisible = false;
     $scope.cardsVisible = false;
@@ -28,7 +28,7 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
         $scope.lobbyVisible = false;
         $scope.roomVisible = true;
     };
-    
+
     $scope.leaveRoom = function() {
         socket.leaveRoom();
         $scope.lobbyVisible = true;
@@ -57,7 +57,7 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
         $scope.cardsVisible = room.cardsOpened;
 
         $scope.storyVisible = room.currentStory != null && room.currentStory != '';
-        
+
         if ($scope.storyVisible === true && $scope.cardsVisible === true) {
             var estimatesEqual = true;
             var commonVal = '';
@@ -89,16 +89,16 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
             }
         }
 
-        $scope.roomHistory = '';
+		$scope.roomHistory = '';
         for (var storyKey in room.history) {
             if (room.history.hasOwnProperty(storyKey)) {
-                $scope.roomHistory = $scope.roomHistory + "<b>" + storyKey + "</b><br/>";
+                $scope.roomHistory = $scope.roomHistory + "<span class='history-st-name'>" + storyKey + "</span>";
                 for (var playerKey in room.history[storyKey]) {
                     if (room.history[storyKey].hasOwnProperty(playerKey)) {
-                        $scope.roomHistory = $scope.roomHistory + "&nbsp;&nbsp;&nbsp;" + room.history[storyKey][playerKey].name + ": " + room.history[storyKey][playerKey].estimate + "</b><br/>";
+                        $scope.roomHistory = $scope.roomHistory + "<span class='player'>" + room.history[storyKey][playerKey].name + ": " + room.history[storyKey][playerKey].estimate + "</span>";
                     }
                 }
-                $scope.roomHistory = $scope.roomHistory + "<br/>";
+                $scope.roomHistory = $scope.roomHistory;
             }
         }
 
@@ -116,7 +116,7 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
     $scope.setNextStory = function() {
         socket.setNextStory($scope.nextStoryEntered);
     };
-    
+
     $scope.toggleCards = function() {
         socket.toggleCards();
     };

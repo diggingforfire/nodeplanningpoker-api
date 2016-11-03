@@ -3,15 +3,21 @@ body, html {
 	background-color: $theme-bg-color;
 }
 
+.contents {
+	padding: $gutter;
+	margin: 0 auto;
+	max-width: 1280px;
+	width: 100%;
+}
+
 .lobby {
-    min-height: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     .checkbox {
-        display:inline-block;
+        display: inline-block;
     }
 }
 
@@ -23,77 +29,76 @@ body, html {
     margin-bottom: 25px;
 }
 
-.roomHeader {
-    padding: 0 20px;
-}
-
-.roomname {
-    font-size: 50px;
-    margin-bottom: 25px;
-}
-
 #storytext, #next, #toggleCards {
     height: 45px;
 }
 
-#currentStory {
+#currentStory, .nostory {
     font-size: 20px;
     text-align: center;
 }
 
-.noStoryMargin {
-    margin-bottom: 52px;
-}
+.controls {
+	display: flex;
+	justify-content: space-between;
+	margin-top:  $gutter / 2;
+	border-radius: $general-border-radius;
+	border: 2px solid $accent;
+	padding: $gutter / 2;
 
-.card-table {
-    display: inline-block;
-    min-width: 300px;
-    width: 70%;
-}
-
-.history {
-    display: inline-block;
-    min-width: 100px;
-    width: 25%;
-    padding: 10px;
-    margin: 0px;
-    vertical-align: top;
-
-	h1 {
-	    font-size: 20px;
-	    text-align: center;
+	button {
+		margin-right: $gutter;
 	}
 
-	.historycontent {
-	    text-align: left;
-	    border: 1px solid #ccc;
-	    min-height: 400px;
-	    padding: 10px;
+	.storyinput {
+	    width: 300px;
+
+		button {
+			margin-right: 0;
+		}
+	}
+}
+
+.cards-history {
+	display: flex;
+	flex-wrap: wrap;
+
+	.estimate-ctn {
+		flex-wrap: wrap;
+		flex: 1 1 auto;
+		padding-top: 40px;
+
+		.card {
+ 			padding: 0 $gutter / 2;
+		}
 	}
 
-}
+	.history {
+		flex: 0 0 auto;
 
-.buttondiv {
-    float:left;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-}
+		h1 {
+		    font-size: 20px;
+		}
 
-.storyinput {
-    float: right;
-    width: 300px;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-}
+		.historycontent {
+			border-radius: $general-border-radius;
+		    border: 2px solid $blue;
+			height: 300px;
+			width: 200px;
+			padding: 10px;
+			margin: 0 $gutter / 2;
 
-.nostory {
-    text-align: center;
-    width: 100%;
-    font-size: 20px;
+			.history-st-name {
+				display: block;
+				font-weight: bold;
+			}
+
+			.player {
+				padding-left: 10px;
+				color: $blue;
+			}
+		}
+	}
 }
 
 h1.activerooms
