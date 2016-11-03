@@ -1,6 +1,6 @@
 'use strict';
 
-var database = require('./data/database');
+var database = require('./data/Database');
 var config = require('./config');
 
 var logger = module.exports = {};
