@@ -5,8 +5,8 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
 
-var ConnectionHandler = require('./model/connectionHandler');
-var Lobby = require('./model/lobby');
+var ConnectionHandler = require('./model/ConnectionHandler');
+var Lobby = require('./model/Lobby');
 
 var config = require('./config');
 var logger = require('./logger');
