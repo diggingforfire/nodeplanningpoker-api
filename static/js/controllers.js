@@ -21,10 +21,10 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
     $scope.estimate = -1;
 
     $scope.joinRoom = function() {
-        socket.joinRoom($scope.roomName, $scope.playerName, $scope.isObserver);
         $cookies.put("roomName", $scope.roomName);
         $cookies.put("playerName", $scope.playerName);
         $cookies.put("isObserver", $scope.isObserver);
+        socket.joinRoom($scope.roomName, $scope.playerName, $scope.isObserver);
         $scope.lobbyVisible = false;
         $scope.roomVisible = true;
     };
@@ -49,8 +49,6 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
         $scope.roomName = room.name;
         $scope.players = room.players;
         $scope.cardsVisible = room.cardsOpened;
-        if (room.players[$scope.playerName].isObserver === false)
-            $scope.estimate = room.players[$scope.playerName].currentEstimate;
 
         $scope.storyVisible = room.currentStory != null && room.currentStory != '';
         
@@ -97,6 +95,9 @@ app.controller('appCtrl', function($scope, $sce, $cookies, socket) {
                 $scope.roomHistory = $scope.roomHistory + "<br/>";
             }
         }
+
+        if (room.players[$scope.playerName] != undefined && room.players[$scope.playerName] != null && room.players[$scope.playerName].isObserver === false)
+            $scope.estimate = room.players[$scope.playerName].currentEstimate;
 
         $scope.$apply();
     });
