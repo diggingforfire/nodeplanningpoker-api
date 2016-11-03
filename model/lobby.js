@@ -8,14 +8,14 @@ module.exports = function Lobby() {
 
     self.rooms = {};
 
-    self.joinRoom = function(roomName, playerName, playerId, joined) {
+    self.joinRoom = function(roomName, playerName, playerId, isObserver, joined) {
         var room = self.rooms[roomName] || new Room(roomName);
 
         if (!self.rooms.hasOwnProperty(roomName)) {
             self.rooms[roomName] = room;
         }
 
-        var newPlayer = new Player(playerName, playerId);
+        var newPlayer = new Player(playerName, playerId, isObserver);
 
         room.addPlayer(newPlayer);
 

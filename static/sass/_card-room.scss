@@ -1,8 +1,31 @@
 .room {
+	.hand {
+		position: relative;
+
+		.card {
+			position: absolute;
+			top: 250px;
+			left: 180px;	
+		}
+
+		.card:nth-child(1) { transform: rotate(-60deg) translate(100px, -150px); }
+		.card:nth-child(2) { transform: rotate(-52deg) translate(100px, -150px); }
+		.card:nth-child(3) { transform: rotate(-44deg) translate(100px, -150px); }
+		.card:nth-child(4) { transform: rotate(-36deg) translate(100px, -150px); }
+		.card:nth-child(5) { transform: rotate(-28deg) translate(100px, -150px); }
+		.card:nth-child(6) { transform: rotate(-20deg) translate(100px, -150px); }
+		.card:nth-child(7) { transform: rotate(-12deg) translate(100px, -150px); }
+		.card:nth-child(8) { transform: rotate(-4deg) translate(100px, -150px); }
+		.card:nth-child(9) { transform: rotate(4deg) translate(100px, -150px); }
+		.card:nth-child(10) { transform: rotate(12deg) translate(100px, -150px); }
+		.card:nth-child(11) { transform: rotate(20deg) translate(100px, -150px); }
+		.card:nth-child(12) { transform: rotate(28deg) translate(100px, -150px); }
+	}
+
 	.card {
 	    cursor: pointer;
 	    background: $theme-card-bg;
-	    border: #cdfdcd 1px solid;
+	    border: #8dadbd 1px solid;
 	    width: 200px;
 	    height: 300px;
 	    border-radius: $general-border-radius;

@@ -40,9 +40,7 @@
   box-sizing: border-box;
   box-shadow: 5px 5px 5px #666;
   margin: 10px;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -ms-flex-pack: center;
   justify-content: center;
   position: relative;
   font-family: "Playfair Display", serif;
@@ -50,19 +48,14 @@
   .room .card.selected {
     border: #8dad8d 4px solid; }
   .room .card .border {
-    -ms-flex-item-align: center;
     align-self: center;
-    display: -ms-inline-flexbox;
     display: inline-flex;
-    -ms-flex-pack: center;
     justify-content: center;
     width: 148px;
     height: 248px;
     border-radius: 15px;
     border: 1px solid #666; }
   .room .card .main-point {
-    -ms-flex-item-align: center;
-    -ms-grid-row-align: center;
     align-self: center;
     font-size: 70px;
     margin-top: -30px;
@@ -111,19 +104,14 @@ body, html {
 
 .lobby {
   min-height: 75%;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -ms-flex-pack: center;
   justify-content: center;
-  -ms-flex-align: center;
   align-items: center; }
   .lobby .checkbox {
     display: inline-block; }
 
 .lobby-item {
-  -ms-flex: 0 1 auto;
   flex: 0 1 auto;
   width: 75%;
   height: 50px;
