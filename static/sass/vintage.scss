@@ -2,8 +2,9 @@
 
 $theme-font: 		'Playfair Display', serif;
 $theme-card-bg:		url(../img/vintage/paper.png);
-$theme-bg-color:	#fff;
+$theme-bg-color:	#F3F3F3;
 
+@import "Amazium/amazium";
 @import "_variables";
 @import "_card-room";
 @import "_global";

@@ -5,91 +5,113 @@
     <title>Node Planning Poker</title>
     <meta name="description" content="A simple mobile friendly planning poker tool built with node.js">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="static/lib/normalize-css/normalize.css">
-    <link rel="stylesheet" href="static/lib/bootstrap/dist/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="static/cardtheme/vintage.css">
 
 </head>
 <body ng-controller="appCtrl">
-	<div class="contents">
+	<div class="contents row">
+		<div class="lobby row" ng-show="lobbyVisible">
+			<form class="grid-6">
+				<h3>Planning poker!</h3>
+				<fieldset>
+					<label>Your name</label>
+					<input type="text" ng-model="playerName" placeholder="Enter your name" />
+				</fieldset>
 
-	    <div class="lobby form-group" ng-show="lobbyVisible">
-	        <input class="lobby-item form-control" type="text" ng-model="playerName" placeholder="Your name" />
-	        <input class="lobby-item form-control" type="text" ng-model="roomName" placeholder="Room name" id="roomName" />
-	        <input class="checkbox" type="checkbox" ng-model="isObserver" /><label>Is Observer</label>
-	        <button type="button" class="btn btn-lg btn-primary lobby-item" ng-click="joinRoom()">Join room</button>
-	        <h1 class="activerooms">Active Rooms</h1>
-	        <div class="activerooms">
-	            <ul class="activeroomlist">
-	                <li ng-repeat="room in roomList" ng-click="setRoomName(room)">{{ room }}</li>
-	            </ul>
-	        </div>
+				<fieldset>
+					<label>Room name</label>
+					<input type="text" ng-model="roomName" placeholder="Enter the room name" id="roomName" />
+				</fieldset>
 
-       		<h1 class="activeplayers" ng-show="playerList.length > 0">Active Players - {{ roomName }}</h1>
-        	<div class="activeplayers" ng-show="playerList.length > 0">
-            	<ul class="activeplayerlist">
-                	<li ng-repeat="player in playerList">{{ player.name }} <span ng-show="player.isObserver">(observer)</span></li>
-            	</ul>
-        	</div>
-	    </div>
-
-	    <div class="room ng-hide" ng-show="roomVisible">
-	        <div class="roomHeader" ng-class="{  false:   'noStoryMargin'  } [nextStory != '']">
-
-	            <div class="row">
-	                <h1 class="roomname">{{ roomName }} - {{ playerName }}</h1>
-	            </div>
-
-	            <div class="controls">
-					<span>
-		                <button id="toggleCards" type="button" class="btn btn-primary btn-lg" ng-click="toggleCards()">Show cards</button>
-		                <button id="resetHistory" type="button" class="btn btn-primary btn-lg" ng-click="resetHistory()">Reset history</button>
+				<fieldset>
+					<span class="checkbox">
+						<span>
+							<input type="checkbox" tabindex="20" name="observer" id="observer" ng-model="isObserver">
+							<label for="observer">I am the observer</label>
+						</span>
 					</span>
+				</fieldset>
 
-	                <div class="storyinput">
-	                    <div class="input-group">
-	                        <input id="storytext" type="text" class="form-control" placeholder="Story" ng-model="nextStoryEntered">
-	                    <span class="input-group-btn">
-	                        <button id="next" type="button" class="btn btn-primary btn-lg" ng-click="setNextStory()">Next</button>
-	                    </span>
-	                    </div>
-	                </div>
-	            </div>
+				<button type="button" class="btn btn--color-positive" ng-click="joinRoom()">Join room</button>
+			</form>
 
-				<div class="row">
-		            <h2 id="currentStory" ng-show="nextStory != ''">Current story: {{ nextStory }}</h2>
-					<h2 class="nostory ng-hide" ng-show="!storyVisible">No story currently selected</h2>
+			<div class="grid-6 room-information">
+				<div class="active-rooms">
+					<h3>Active Rooms</h3>
+					<ul class="activeroomlist">
+						<li ng-repeat="room in roomList" class="btn btn--color-info" ng-click="setRoomName(room)">{{ room }}</li>
+					</ul>
 				</div>
-	        </div>
 
-	        <div class="cards-history ng-hide" ng-show="storyVisible">
-	            <div class="cards estimate-ctn">
-	                <div class="card estimate" ng-repeat="player in players" ng-show="!player.isObserver" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
-	            </div>
+				<div class="active-players" ng-show="playerList.length > 0">
+					<h3 ng-show="playerList.length > 0">Active Players - {{ roomName }}</h3>
+					<ul class="activeplayerlist">
+						<li ng-repeat="player in playerList">{{ player.name }} <span ng-show="player.isObserver">(observer)</span></li>
+					</ul>
+				</div>
 
-				<div class="history" ng-show="storyVisible">
-		            <h1>History</h1>
-		            <div class="historycontent" ng-bind-html="roomHistory"></div>
-		        </div>
-	        </div>
+			</div>
 
-			<div class="cards hand ng-hide" ng-show="!isObserver">
+		</div>
+
+		<div class="room ng-hide" ng-show="roomVisible">
+			<div class="roomHeader row" ng-class="{  false:   'noStoryMargin'  } [nextStory != '']">
+
+				<h1 class="roomname">{{ roomName }} - {{ playerName }}</h1>
+
+				<div class="controls row">
+					<fieldset class="grid-6">
+						<div class="has-inline-elements">
+							<button id="toggleCards" type="button" class="btn btn--color-positive" ng-click="toggleCards()">Show cards</button>
+							<button id="resetHistory" type="button" class="btn btn--color-negative" ng-click="resetHistory()">Reset history</button>
+						</div>
+					</fieldset>
+
+					<fieldset  class="grid-6">
+						<div class="has-inline-elements">
+							<input id="storytext" type="text" class="form-control" placeholder="Story" ng-model="nextStoryEntered">
+							<span class="inline-btn-group">
+								<button id="next" type="button" class="btn btn--color-positive" ng-click="setNextStory()">Next</button>
+							</span>
+						</div>
+					</fieldset>
+				</div>
+
+			</div>
+
+			<div class="row messages">
+				<p class="message message--color-info" id="currentStory" ng-show="nextStory != ''">Current story: {{ nextStory }}</p>
+				<p class="message message--color-warning ng-hide" ng-show="!storyVisible">No story currently selected</p>
+			</div>
+
+			<div class="row table ng-hide" ng-show="storyVisible">
+				<div class="cards estimate-ctn grid-9">
+					<div class="card estimate" ng-repeat="player in players" ng-show="!player.isObserver" ng-class="{nocard: player.currentEstimate == '', cardsinvisible: $parent.cardsVisible==false}"><div class="border"><div class="main-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div></div><div class="topleft-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="bottomright-point">{{ player.currentEstimate == '' ? '&nbsp;' : player.currentEstimate }}</div><div class="playername">{{ player.name }}</div></div>
+				</div>
+
+				<div class="history grid-3" ng-show="storyVisible">
+					<h3>History</h3>
+					<div class="historycontent" ng-bind-html="roomHistory"></div>
+				</div>
+			</div>
+
+			<div class="cards hand ng-hide" ng-show="!isObserver && storyVisible">
 				<div class="card" ng-repeat="point in storyPoints" ng-class="{selected: point==$parent.estimate}" ng-click="$parent.setEstimate(point)"><div class="border"><div class="main-point">{{ point }}</div></div><div class="topleft-point">{{ point }}</div><div class="bottomright-point">{{ point }}</div></div>
 			</div>
 
-	    </div>
+		</div>
 
 	</div>
 
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="static/lib/angular/angular.min.js"></script>
-    <script src="static/lib/angular/angular-cookies.js"></script>
-    <script src="static/lib/angular/angular-sanitize.min.js"></script>
-    <script src="static/js/app.js"></script>
-    <script src="static/js/services.js"></script>
-    <script src="static/js/controllers.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="static/lib/angular/angular.min.js"></script>
+	<script src="static/lib/angular/angular-cookies.js"></script>
+	<script src="static/lib/angular/angular-sanitize.min.js"></script>
+	<script src="static/js/app.js"></script>
+	<script src="static/js/services.js"></script>
+	<script src="static/js/controllers.js"></script>
 
 </body>
 </html>

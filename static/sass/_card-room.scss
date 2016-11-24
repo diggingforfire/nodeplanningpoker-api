@@ -1,76 +1,96 @@
 .room {
-	.hand {
-		position: relative;
 
-		.card {
-			position: absolute;
-			top: 250px;
-			left: 180px;
+	@media (min-width:$grid-width-tablet) {
+
+		.hand {
+			position: relative;
+
+			.card {
+				position: absolute;
+				top: 250px;
+				left: 180px;
+			}
+
+			.card:nth-child(1) { transform: rotate(-60deg) translate(100px, -150px); }
+			.card:nth-child(2) { transform: rotate(-52deg) translate(100px, -150px); }
+			.card:nth-child(3) { transform: rotate(-44deg) translate(100px, -150px); }
+			.card:nth-child(4) { transform: rotate(-36deg) translate(100px, -150px); }
+			.card:nth-child(5) { transform: rotate(-28deg) translate(100px, -150px); }
+			.card:nth-child(6) { transform: rotate(-20deg) translate(100px, -150px); }
+			.card:nth-child(7) { transform: rotate(-12deg) translate(100px, -150px); }
+			.card:nth-child(8) { transform: rotate(-4deg) translate(100px, -150px); }
+			.card:nth-child(9) { transform: rotate(4deg) translate(100px, -150px); }
+			.card:nth-child(10) { transform: rotate(12deg) translate(100px, -150px); }
+			.card:nth-child(11) { transform: rotate(20deg) translate(100px, -150px); }
+			.card:nth-child(12) { transform: rotate(28deg) translate(100px, -150px); }
 		}
 
-		.card:nth-child(1) { transform: rotate(-60deg) translate(100px, -150px); }
-		.card:nth-child(2) { transform: rotate(-52deg) translate(100px, -150px); }
-		.card:nth-child(3) { transform: rotate(-44deg) translate(100px, -150px); }
-		.card:nth-child(4) { transform: rotate(-36deg) translate(100px, -150px); }
-		.card:nth-child(5) { transform: rotate(-28deg) translate(100px, -150px); }
-		.card:nth-child(6) { transform: rotate(-20deg) translate(100px, -150px); }
-		.card:nth-child(7) { transform: rotate(-12deg) translate(100px, -150px); }
-		.card:nth-child(8) { transform: rotate(-4deg) translate(100px, -150px); }
-		.card:nth-child(9) { transform: rotate(4deg) translate(100px, -150px); }
-		.card:nth-child(10) { transform: rotate(12deg) translate(100px, -150px); }
-		.card:nth-child(11) { transform: rotate(20deg) translate(100px, -150px); }
-		.card:nth-child(12) { transform: rotate(28deg) translate(100px, -150px); }
 	}
 
 	.card {
-	    cursor: pointer;
-	    background: $theme-card-bg;
-	    border: #8dadbd 1px solid;
-	    width: 200px;
-	    height: 300px;
-	    border-radius: $general-border-radius;
-	    box-sizing: border-box;
-	    box-shadow: 5px 5px 5px $general-gray;
-	    margin: 10px;
-	    display: inline-flex;
-	    justify-content: center;
-	    position: relative;
-	    font-family: $theme-font;
-	    font-weight: bold;
+		cursor: pointer;
+		background: $theme-card-bg;
+		border: #8dadbd 1px solid;
+		width: 200px;
+		height: 300px;
+		border-radius: $general-border-radius;
+		box-sizing: border-box;
+		box-shadow: 5px 5px 5px $general-gray;
+		margin: 10px;
+		display: inline-flex;
+		justify-content: center;
+		position: relative;
+		font-family: $theme-font;
+		font-weight: bold;
+
+		@media (max-width:$grid-width-tablet) {
+			width: 100px;
+			height: 150px;
+		}
 
 		&.selected {
-		    border: #8dad8d 4px solid;
+			border: #8dad8d 4px solid;
 		}
 
 		.border {
-	       align-self: center;
-	       display: inline-flex;
-	       justify-content: center;
-	       width: 148px;
-	       height: 248px;
-	       border-radius: $general-border-radius;
-	       border: 1px solid $general-gray;
-	   }
+			align-self: center;
+			display: inline-flex;
+			justify-content: center;
+			width: 148px;
+			height: 248px;
+			border-radius: $general-border-radius;
+			border: 1px solid $general-gray;
+
+			@media (max-width:$grid-width-tablet) {
+				width: 75px;
+				height: 92px;
+			}
+		}
 
 		.main-point {
-		   align-self: center;
-		   font-size: 70px;
-		   margin-top: -30px;
-		   opacity: 0.8;
-	   }
+			align-self: center;
+			font-size: 70px;
+			margin-top: -30px;
+			opacity: 0.8;
 
-	   .topleft-point {
-	       position: absolute;
-	       left: 5px;
-	       top: 5px;
-	       width: 32px;
-	       text-align: center;
-	       opacity: 0.8;
-	       font-size: 20px;
-	       margin-top: -5px;
-	   }
+			@media (max-width:$grid-width-tablet) {
+				font-size: 40px;
+				margin-top: -10px;
+			}
+		}
 
-	   .bottomright-point {
+		.topleft-point {
+			position: absolute;
+			left: 5px;
+			top: 5px;
+			width: 32px;
+			text-align: center;
+			opacity: 0.8;
+			font-size: 20px;
+			margin-top: -5px;
+		}
+
+		.bottomright-point {
 			position: absolute;
 			right: 5px;
 			bottom: 5px;
@@ -80,9 +100,9 @@
 			font-size: 20px;
 			margin-bottom: -5px;
 			transform: rotate(-180deg);
-	   }
+		}
 
-	   &.estimate {
+		&.estimate {
 			&.nocard {
 				background: transparent;
 			    border: $blue 2px dashed;
@@ -105,11 +125,12 @@
 			}
 
 			.playername {
-			   position: absolute;
-			   left: 0;
-			   top: 300px;
-			   width: 100%;
-			   text-align: center;
+				position: absolute;
+				left: 0;
+				top: 300px;
+				width: 100%;
+				text-align: center;
+				padding-top: 5px;
 		   }
 		}
 	}
