@@ -113,21 +113,21 @@
 				}
 
 				.main-point, .topleft-point, .bottomright-point, .main-point, .topleft-point, .bottomright-point {
-				    opacity: 0;
+					opacity: 0;
 				}
 			}
 
 			&.cardsinvisible {
 
 				.main-point, .topleft-point, .bottomright-point, .main-point, .topleft-point, .bottomright-point {
-				    opacity: 0;
+					opacity: 0;
 				}
 			}
 
 			.playername {
 				position: absolute;
 				left: 0;
-				top: 300px;
+				top: 100%;
 				width: 100%;
 				text-align: center;
 				padding-top: 5px;

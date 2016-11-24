@@ -2608,7 +2608,7 @@ This applies from 992px onwards
   .room .card.estimate .playername {
     position: absolute;
     left: 0;
-    top: 300px;
+    top: 100%;
     width: 100%;
     text-align: center;
     padding-top: 5px; }
@@ -2701,7 +2701,7 @@ body, html {
       font-size: 25px; }
     .table .history .historycontent .player {
       margin-bottom: 5px;
-      color: #F8B700; }
+      color: #1A2730; }
 
 body {
   font-family: 'Maven Pro', sans-serif;
