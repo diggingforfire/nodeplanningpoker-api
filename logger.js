@@ -16,31 +16,33 @@ function Log() {
         if (config.logToConsole) {
             console.log(getTimeFormattedMessage(message));
         }
-
-        database.getServer(function(err, server) {
-            if (err) {
-                console.warn(getTimeFormattedMessage('Error writing to log: ' + err));
-            } else {
-                var logEntry = {
-                    message: message,
-                    type: type,
-                    timestamp: new Date(),
-                };
-
-                if (object) {
-                    logEntry.context = {
-                        constructor: object.constructor.name,
-                        object: object
+        
+        if (config.logToDatabase) {
+            database.getServer(function(err, server) {
+                if (err) {
+                    console.warn(getTimeFormattedMessage('Error writing to log: ' + err));
+                } else {
+                    var logEntry = {
+                        message: message,
+                        type: type,
+                        timestamp: new Date(),
                     };
-                }
 
-                server.log.insert(logEntry, function(err) {
-                    if (err) {
-                        console.warn(getTimeFormattedMessage(err.message));
+                    if (object) {
+                        logEntry.context = {
+                            constructor: object.constructor.name,
+                            object: object
+                        };
                     }
-                });
-            }
-        });
+
+                    server.log.insert(logEntry, function(err) {
+                        if (err) {
+                            console.warn(getTimeFormattedMessage(err.message));
+                        }
+                    });
+                }
+            });
+        }
     };
 
     function getTimeFormattedMessage(message) {

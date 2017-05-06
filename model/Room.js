@@ -17,41 +17,27 @@ Room.prototype.addPlayer = function(player) {
     self.players[player.name] = player;
 };
 
-Room.prototype.resetHistory = function() {
+Room.prototype.removePlayerByName = function(playerName) {
     var self = this;
-    self.history = {};
-}
-
-Room.prototype.addStoryToHistory = function() {
-    var self = this;
-
-    if (self.currentStory == null || self.currentStory == '')
-        return;
-
-    var estimates = {};
-
-    for (var key in self.players) {
-        if (self.players.hasOwnProperty(key) && self.players[key].isObserver === false) {
-            estimates[key] = {};
-            estimates[key].name = self.players[key].name;
-            estimates[key].estimate = self.players[key].currentEstimate;
-        }
-    }
-    self.history[self.currentStory] = estimates;
-}
+    delete self.players[playerName];
+};
 
 Room.prototype.resetPlayerEstimates = function(player) {
     var self = this;
     for (var key in self.players) {
-        if (self.players.hasOwnProperty(key) && self.players[key].isObserver === false) {
+        if (self.players.hasOwnProperty(key) && !self.players[key].isObserver) {
             self.players[key].currentEstimate = '';
         }
     }
 };
 
-Room.prototype.removePlayerByName = function(playerName) {
+Room.prototype.toggleCards = function() {
     var self = this;
-    delete self.players[playerName];
+    self.cardsOpened = !self.cardsOpened;
+
+    if (self.cardsOpened) {
+        self.addStoryToHistory();
+    }
 };
 
 Room.prototype.hideCards = function() {
@@ -59,14 +45,24 @@ Room.prototype.hideCards = function() {
     self.cardsOpened = false;
 };
 
-Room.prototype.toggleCards = function() {
+Room.prototype.addStoryToHistory = function() {
     var self = this;
-    self.cardsOpened = !self.cardsOpened;
-    if (self.cardsOpened)
-        self.addStoryToHistory();
-};
 
-Room.prototype.getPlayers = function() {
-    var self = this
-    return self.players;
+    if (self.currentStory) {
+        var estimates = {};
+
+        for (var key in self.players) {
+            if (self.players.hasOwnProperty(key) && !self.players[key].isObserver) {
+                estimates[key] = {};
+                estimates[key].name = self.players[key].name;
+                estimates[key].estimate = self.players[key].currentEstimate;
+            }
+        }
+        self.history[self.currentStory] = estimates;
+    }
+}
+
+Room.prototype.resetHistory = function() {
+    var self = this;
+    self.history = {};
 }
