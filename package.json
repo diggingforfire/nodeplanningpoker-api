@@ -4,8 +4,8 @@
 	"description": "A simple planning poker api built with node.js",
 	"main": "app.js",
 	"scripts": {
-		"test": "./node_modules/.bin/mocha --reporter spec",
-		"start": "node app.js"
+		"test": "./node_modules/.bin/mocha src/test --reporter spec",
+		"start": "node src/app.js"
 	},
 	"author": "diggingforfire",
 	"license": "MIT",
