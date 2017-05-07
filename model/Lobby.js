@@ -3,7 +3,9 @@
 var Room = require('./Room');
 var Player = require('./Player');
 
-module.exports = function Lobby() {
+module.exports = Lobby;
+
+function Lobby() {
 	var self = this;
 
 	self.rooms = {};

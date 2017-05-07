@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = function Player(name, id, isObserver) {
+module.exports = Player;
+
+function Player(name, id, isObserver) {
 	var self = this;
 
 	self.name = name;

@@ -3,7 +3,9 @@
 var Connection = require('./Connection');
 var logger = require('../logger');
 
-module.exports = function ConnectionHandler(io, lobby) {
+module.exports = ConnectionHandler;
+
+function ConnectionHandler(io, lobby) {
 
 	var connections = [];
 
