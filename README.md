@@ -1,5 +1,5 @@
-# nodeplanningpoker
-A simple mobile friendly planning poker tool built with node.js
+# nodeplanningpoker-api
+A simple planning poker api built with node.js
 
 ## About
 
