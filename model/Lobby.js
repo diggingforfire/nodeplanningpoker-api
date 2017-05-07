@@ -4,37 +4,37 @@ var Room = require('./Room');
 var Player = require('./Player');
 
 module.exports = function Lobby() {
-    var self = this;
+	var self = this;
 
-    self.rooms = {};
+	self.rooms = {};
 
-    self.joinRoom = function(roomName, playerName, playerId, isObserver, joined) {
-        var room = self.rooms[roomName] || new Room(roomName);
+	self.joinRoom = function (roomName, playerName, playerId, isObserver, joined) {
+		var room = self.rooms[roomName] || new Room(roomName);
 
-        if (!self.rooms.hasOwnProperty(roomName)) {
-            self.rooms[roomName] = room;
-        }
+		if (!self.rooms.hasOwnProperty(roomName)) {
+			self.rooms[roomName] = room;
+		}
 
-        var newPlayer = new Player(playerName, playerId, isObserver);
+		var newPlayer = new Player(playerName, playerId, isObserver);
 
-        room.addPlayer(newPlayer);
+		room.addPlayer(newPlayer);
 
-        if (joined) {
-            joined(room, newPlayer);
-        }
-    };
+		if (joined) {
+			joined(room, newPlayer);
+		}
+	};
 
-    self.leaveRoom = function(roomName, playerName, left) {
-        var room = self.rooms[roomName];
+	self.leaveRoom = function (roomName, playerName, left) {
+		var room = self.rooms[roomName];
 
-        room.removePlayerByName(playerName);
+		room.removePlayerByName(playerName);
 
-        if (!Object.keys(room.players).length) {
-            delete self.rooms[roomName];
-        }
+		if (!Object.keys(room.players).length) {
+			delete self.rooms[roomName];
+		}
 
-        if (left) {
-            left(room);
-        }
-    };
+		if (left) {
+			left(room);
+		}
+	};
 };

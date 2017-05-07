@@ -4,138 +4,138 @@ var should = require('should');
 var Room = require('../model/Room');
 var Player = require('../model/Player');
 
-describe('Room', function() {
+describe('Room', function () {
 
-    describe('addPlayer', function() {
-        it('should add a player with the given name to the room', function() {
-            var room = new Room('Living room');
-            var player = new Player('Mike');
+	describe('addPlayer', function () {
+		it('should add a player with the given name to the room', function () {
+			var room = new Room('Living room');
+			var player = new Player('Mike');
 
-            room.addPlayer(player);
+			room.addPlayer(player);
 
-            room.players.should.have.property('Mike');
-        });
-    });
+			room.players.should.have.property('Mike');
+		});
+	});
 
-    describe('removePlayerByName', function() {
-        it('should remove the player with the given name from the room', function() {
-            var room = new Room('Living room');
-            var player = new Player('Rafael');
+	describe('removePlayerByName', function () {
+		it('should remove the player with the given name from the room', function () {
+			var room = new Room('Living room');
+			var player = new Player('Rafael');
 
-            room.addPlayer(player);
-            room.removePlayerByName('Rafael');
+			room.addPlayer(player);
+			room.removePlayerByName('Rafael');
 
-            room.players.should.not.have.property('Rafael');
-        });
-    });
+			room.players.should.not.have.property('Rafael');
+		});
+	});
 
-    describe ('resetPlayerEstimates', function() {
-        it('should reset the estimate of all players in the room', function() {
-            var room = new Room('Room with a view');
-            
-            var leo = new Player('Leo');
-            leo.currentEstimate = '5';
+	describe('resetPlayerEstimates', function () {
+		it('should reset the estimate of all players in the room', function () {
+			var room = new Room('Room with a view');
 
-            var dona = new Player('Dona')
-            dona.currentEstimate = '13'
+			var leo = new Player('Leo');
+			leo.currentEstimate = '5';
 
-            room.addPlayer(leo);
+			var dona = new Player('Dona')
+			dona.currentEstimate = '13'
 
-            room.resetPlayerEstimates();
+			room.addPlayer(leo);
 
-            leo.currentEstimate.should.equal('')
-            dona.currentEstimate.should.equal('13')
-        });
+			room.resetPlayerEstimates();
 
-        it('should not reset the estimate of observers in the room', function() {
-            var room = new Room('Room with a view');
-            
-            var leo = new Player('Leo', 5, true);
-            leo.currentEstimate = '5';
+			leo.currentEstimate.should.equal('')
+			dona.currentEstimate.should.equal('13')
+		});
 
-            var dona = new Player('Dona')
-            dona.currentEstimate = '13'
+		it('should not reset the estimate of observers in the room', function () {
+			var room = new Room('Room with a view');
 
-            room.addPlayer(leo);
+			var leo = new Player('Leo', 5, true);
+			leo.currentEstimate = '5';
 
-            room.resetPlayerEstimates();
+			var dona = new Player('Dona')
+			dona.currentEstimate = '13'
 
-            leo.currentEstimate.should.equal('5')
-            dona.currentEstimate.should.equal('13')
-        });
-    });
+			room.addPlayer(leo);
 
-    describe('toggleCards', function() {
-        it('should set cardsOpened to true when false', function() {
-            var room = new Room('Living room');
-            room.toggleCards();
+			room.resetPlayerEstimates();
 
-            room.cardsOpened.should.be.true();
-        });
-        
-        it('should set cardsOpened to false when true', function() {
-            var room = new Room('Living room');
-            room.cardsOpened = true;
+			leo.currentEstimate.should.equal('5')
+			dona.currentEstimate.should.equal('13')
+		});
+	});
 
-            room.toggleCards();
+	describe('toggleCards', function () {
+		it('should set cardsOpened to true when false', function () {
+			var room = new Room('Living room');
+			room.toggleCards();
 
-            room.cardsOpened.should.not.be.true();
-        });
+			room.cardsOpened.should.be.true();
+		});
 
-        it('should set cardsOpened to the same value when called twice', function() {
-            var room = new Room('Living room');
-            room.cardsOpened = true;
+		it('should set cardsOpened to false when true', function () {
+			var room = new Room('Living room');
+			room.cardsOpened = true;
 
-            room.toggleCards();
-            room.toggleCards();
+			room.toggleCards();
 
-            room.cardsOpened.should.be.true();
-        });
+			room.cardsOpened.should.not.be.true();
+		});
 
-        it('should call addStoryToHistory when cards are opened', function() {
+		it('should set cardsOpened to the same value when called twice', function () {
+			var room = new Room('Living room');
+			room.cardsOpened = true;
 
-        });
+			room.toggleCards();
+			room.toggleCards();
 
-        it('should not call addStoryToHistory when cards are closed', function() {
-            
-        });
-    });
+			room.cardsOpened.should.be.true();
+		});
 
-    describe('hideCards', function() {
-        it('should set cardsOpened to false when true', function() {
-            var room = new Room('My room');
-            
-            room.toggleCards();
-            room.hideCards();
+		it('should call addStoryToHistory when cards are opened', function () {
 
-            room.cardsOpened.should.be.false();
-        });
+		});
 
-        it('should set cardsOpened to false when false', function() {
-            var room = new Room('My room');
-            
-            room.hideCards();
+		it('should not call addStoryToHistory when cards are closed', function () {
 
-            room.cardsOpened.should.be.false();
-        });
+		});
+	});
 
-        
-        it('should set cardsOpened to false when called multiple times', function() {
-            var room = new Room('My room');
-            
-            room.hideCards();
-            room.hideCards();
-            room.hideCards();
- 
-            room.cardsOpened.should.be.false();
-        });
-    });
+	describe('hideCards', function () {
+		it('should set cardsOpened to false when true', function () {
+			var room = new Room('My room');
 
-    describe('addStoryToHistory', function() {
-    
-    });
+			room.toggleCards();
+			room.hideCards();
 
-    describe('resetHistory', function() {
-        
-    });
+			room.cardsOpened.should.be.false();
+		});
+
+		it('should set cardsOpened to false when false', function () {
+			var room = new Room('My room');
+
+			room.hideCards();
+
+			room.cardsOpened.should.be.false();
+		});
+
+
+		it('should set cardsOpened to false when called multiple times', function () {
+			var room = new Room('My room');
+
+			room.hideCards();
+			room.hideCards();
+			room.hideCards();
+
+			room.cardsOpened.should.be.false();
+		});
+	});
+
+	describe('addStoryToHistory', function () {
+
+	});
+
+	describe('resetHistory', function () {
+
+	});
 });

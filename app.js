@@ -14,6 +14,6 @@ var logger = require('./logger');
 var lobby = new Lobby();
 var connectionHandler = new ConnectionHandler(io, lobby);
 
-http.listen(config.serverPort, function() {
-    logger.log.write('Running server on port ' + config.serverPort, logger.logType.INFO);
+http.listen(config.serverPort, function () {
+	logger.log.write('Running server on port ' + config.serverPort, logger.logType.INFO);
 });
