@@ -1,5 +1,7 @@
 # nodeplanningpoker-api
-A simple planning poker api built with node.js
+A simple planning poker api built with node.js. Available clients:
+
+* [nodeplanningpoker-client-ng2](https://github.com/diggingforfire/nodeplanningpoker-client-ng2)
 
 ## About
 
