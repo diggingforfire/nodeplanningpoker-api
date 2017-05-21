@@ -36,18 +36,15 @@ function Connection(lobby, socket, io, disconnect) {
 	});
 
 	socket.on('getPlayers', function () {
-		var players = self.getPlayers();
-		return players;
+		return self.getPlayers();
 	});
 
 	socket.on('getActiveRooms', function () {
-		var rooms = self.getActiveRooms();
-		return rooms;
+		return self.getActiveRooms();
 	});
 
 	socket.on('getActivePlayers', function (room) {
-		var players = self.getActivePlayers(room);
-		return players;
+		return self.getActivePlayers(room);
 	});
 }
 
