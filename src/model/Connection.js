@@ -175,13 +175,15 @@ Connection.prototype.getActivePlayers = function (room) {
 Connection.prototype.updatePlayerList = function (room) {
 	var self = this;
 	var players = [];
-	if (room != undefined && room != null && room != '' && self.lobby.rooms[room] != undefined && self.lobby.rooms[room] != null) {
+
+	if (room && self.lobby.rooms[room]) {
 		for (var key in self.lobby.rooms[room].players) {
 			if (self.lobby.rooms[room].players.hasOwnProperty(key)) {
 				players[players.length] = { name: key, isObserver: self.lobby.rooms[room].players[key].isObserver };
 			}
 		}
 	}
+	
 	self.io.sockets.emit('updatePlayerList', players);
 };
 
