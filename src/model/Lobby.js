@@ -29,14 +29,16 @@ function Lobby() {
 	self.leaveRoom = function (roomName, playerName, left) {
 		var room = self.rooms[roomName];
 
-		room.removePlayerByName(playerName);
+		if (room) {
+			room.removePlayerByName(playerName);
 
-		if (!Object.keys(room.players).length) {
-			delete self.rooms[roomName];
-		}
+			if (!Object.keys(room.players).length) {
+				delete self.rooms[roomName];
+			}
 
-		if (left) {
-			left(room);
+			if (left) {
+				left(room);
+			}
 		}
 	};
 };
