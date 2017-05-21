@@ -15,6 +15,10 @@ function Connection(lobby, socket, io, disconnect) {
 		self.joinRoom(roomName, playerName, isObserver);
 	});
 
+	socket.on('leaveRoom', function() {
+		self.disconnect();
+	});
+
 	socket.on('setEstimate', function (estimate) {
 		self.setEstimate(estimate);
 	});
